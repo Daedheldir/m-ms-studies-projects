@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mainActivityLayoutSpacing"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/weightText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="center_horizontal"
+            android:text="@string/weightText"
+            android:textSize="@dimen/mainActivityTextViewTextSize" />
+
+        <EditText
+            android:id="@+id/weightInputField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/weightHintText"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textSize="@dimen/mainActivityInputTextSize" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="5" />
+
+        <TextView
+            android:id="@+id/heightText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="center_horizontal"
+            android:text="@string/heightText"
+            android:textSize="@dimen/mainActivityTextViewTextSize" />
+
+        <EditText
+            android:id="@+id/heightInputField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/heightHintText"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textSize="@dimen/mainActivityInputTextSize" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/mainActivityLayoutSpacing"
+        android:gravity="center_horizontal|top"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/calculateBMIButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bmiCalculateButtonText"
+            android:textSize="@dimen/mainActivityButtonTextSize" />
+
+        <TextView
+            android:id="@+id/bmiValueOutputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/bmiValueText"
+            android:textSize="@dimen/mainActivityBMIOutputTextSize" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mainActivityLayoutSpacing">30dp</dimen>
+    <dimen name="mainActivityTextViewTextSize">18sp</dimen>
+    <dimen name="mainActivityInputTextSize">24sp</dimen>
+    <dimen name="mainActivityButtonTextSize">24sp</dimen>
+    <dimen name="mainActivityBMIOutputTextSize">36sp</dimen>
+</resources>

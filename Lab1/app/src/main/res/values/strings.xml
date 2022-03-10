@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Lab1</string>
+
+    <string name="weightText">Weight [kg]</string>
+    <string name="heightText">Height [cm]</string>
+    <string name="weightHintText">Input your weight</string>
+    <string name="heightHintText">Input your height</string>
+    <string name="bmiCalculateButtonText">Calculate BMI</string>
+    <string name="bmiValueText">BMI Value</string>
+
+    <string name="underweight3Text">severely underweight</string>
+    <string name="underweight2Text">moderately underweight</string>
+    <string name="underweight1Text">underweight</string>
+    <string name="normalRangeText">in normal range</string>
+    <string name="overweightText">overweight</string>
+    <string name="obese1Text">obese (Class I)</string>
+    <string name="obese2Text">obese (Class II)</string>
+    <string name="obese3Text">obese (Class III)</string>
+
+    <string name="bmiFinalText">Your BMI equals %s, you are %s</string>
+</resources>
