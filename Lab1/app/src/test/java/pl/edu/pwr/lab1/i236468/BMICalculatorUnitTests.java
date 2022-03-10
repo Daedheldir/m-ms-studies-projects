@@ -14,4 +14,12 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void bmiCalculationIsCorrect(){assertEquals(2.5f, BMICalculator.CalculateBMIValue(10, 2));}
+
+    @Test
+    public void bmiCategoriesAreCorrect(){
+        assertEquals(BMICalculator.BMICategories.Normal, BMICalculator.GetBMICategory());
+    }
 }
