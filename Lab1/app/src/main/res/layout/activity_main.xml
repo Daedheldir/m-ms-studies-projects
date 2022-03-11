@@ -37,6 +37,7 @@
             android:importantForAutofill="no"
             android:inputType="numberDecimal"
             android:singleLine="true"
+            android:textColorHint="#78909C"
             android:textSize="@dimen/mainActivityInputTextSize" />
 
         <Space
@@ -64,6 +65,7 @@
             android:importantForAutofill="no"
             android:inputType="numberDecimal"
             android:singleLine="true"
+            android:textColorHint="#78909C"
             android:textSize="@dimen/mainActivityInputTextSize" />
 
     </LinearLayout>

@@ -1,6 +1,9 @@
 package pl.edu.pwr.lab1.i236468;
 
 public  class BMICalculator {
+	private final static float weightMax = 1000.0f;
+	private final static float heightMax = 500.0f;
+
 	private BMICalculator(){}
 	enum BMICategories{
 		Underweight3,
@@ -11,6 +14,18 @@ public  class BMICalculator {
 		Obese1,
 		Obese2,
 		Obese3
+	}
+	public static boolean IsWeightValid(float weight){
+		if(weight <= 0 || weight > weightMax)
+			return false;
+
+		return true;
+	}
+	public static boolean IsHeightValid(float height){
+		if(height <= 0 || height > heightMax)
+			return false;
+
+		return true;
 	}
 	public static float CalculateBMIValue(float weight, float height){
 		if(height == 0)

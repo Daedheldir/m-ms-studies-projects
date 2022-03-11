@@ -1,18 +1,17 @@
 package pl.edu.pwr.lab1.i236468;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.EnumMap;
+
+public class MainActivity extends AppCompatActivity {
+	private final EnumMap<BMICalculator.BMICategories, String> bmiCategoriesLUT = new EnumMap<>(BMICalculator.BMICategories.class);
 	protected EditText weightInputField;
 	protected EditText heightInputField;
 	protected TextView bmiOutputText;
@@ -24,33 +23,22 @@ public class MainActivity extends AppCompatActivity {
 		Log.d("TESTING", "The onCreate() event");
 		setContentView(R.layout.activity_main);
 
-		weightInputField = (EditText)findViewById(R.id.weightInputField);
-		heightInputField = (EditText)findViewById(R.id.heightInputField);
-		bmiOutputText = (TextView)findViewById(R.id.bmiValueOutputText);
-		calculateBMIButton = (Button)findViewById(R.id.calculateBMIButton);
+		bmiCategoriesLUT.put(BMICalculator.BMICategories.Underweight3, getString(R.string.underweight3Text));
+		bmiCategoriesLUT.put(BMICalculator.BMICategories.Underweight2, getString(R.string.underweight2Text));
+		bmiCategoriesLUT.put(BMICalculator.BMICategories.Underweight1, getString(R.string.underweight1Text));
+		bmiCategoriesLUT.put(BMICalculator.BMICategories.Normal, getString(R.string.normalRangeText));
+		bmiCategoriesLUT.put(BMICalculator.BMICategories.Overweight, getString(R.string.overweightText));
+		bmiCategoriesLUT.put(BMICalculator.BMICategories.Obese1, getString(R.string.obese1Text));
+		bmiCategoriesLUT.put(BMICalculator.BMICategories.Obese2, getString(R.string.obese2Text));
+		bmiCategoriesLUT.put(BMICalculator.BMICategories.Obese3, getString(R.string.obese3Text));
+
+		weightInputField = findViewById(R.id.weightInputField);
+		heightInputField = findViewById(R.id.heightInputField);
+		bmiOutputText = findViewById(R.id.bmiValueOutputText);
+		calculateBMIButton = findViewById(R.id.calculateBMIButton);
 
 		calculateBMIButton.setOnClickListener(view -> UpdateBMIValue());
 
-    	/*TextWatcher inputWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                UpdateBMIValue();
-            }
-        };
-
-        weightInputField.addTextChangedListener(inputWatcher);
-        heightInputField.addTextChangedListener(inputWatcher);
-        */
 	}
 	@Override
 	protected void onStart(){
@@ -80,60 +68,37 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void UpdateBMIValue(){
+		//TODO: move all of this to bmi calculator, return from it either a string with value or error string
 		String weightStr = weightInputField.getText().toString();
-		if(weightStr.equals("")){
-			bmiOutputText.setText(R.string.bmiValueText);
-			weightInputField.setHint(R.string.weightErrorText);
-			weightInputField.setHintTextColor(getResources().getColor(R.color.red));
-			return;
-		}
-
+		boolean weightValid = ValidateInputField(weightInputField, getString(R.string.weightErrorText), getString(R.string.weightHintText));
 		String heightStr = heightInputField.getText().toString();
-		if(heightStr.equals("")){
+		boolean heightValid = ValidateInputField(heightInputField, getString(R.string.heightErrorText), getString(R.string.heightHintText));
+
+		if(!weightValid || !heightValid){
 			bmiOutputText.setText(R.string.bmiValueText);
-			heightInputField.setHint(R.string.heightErrorText);
-			heightInputField.setHintTextColor(getResources().getColor(R.color.red));
 			return;
 		}
-
-		weightInputField.setHint(R.string.weightHintText);
-		weightInputField.setHintTextColor(getResources().getColor(R.color.black));
-		heightInputField.setHint(R.string.heightHintText);
-		heightInputField.setHintTextColor(getResources().getColor(R.color.black));
 
 		final float weightVal = Float.parseFloat(weightStr);
 		final float heightVal = Float.parseFloat(heightInputField.getText().toString());
 
 		final float bmiVal = BMICalculator.CalculateBMIValue(weightVal, heightVal/100);
 
-		String bmiCategory = "";
+		String bmiCategory = bmiCategoriesLUT.get(BMICalculator.GetBMICategory(bmiVal));
 
-		switch (BMICalculator.GetBMICategory(bmiVal)){
-			case Underweight3:
-				bmiCategory = getString(R.string.underweight3Text);
-				break;
-			case Underweight2:
-				bmiCategory = getString(R.string.underweight2Text);
-				break;
-			case Underweight1:
-				bmiCategory = getString(R.string.underweight1Text);
-				break;
-			case Normal:
-				bmiCategory = getString(R.string.normalRangeText);
-				break;
-			case Overweight:
-				bmiCategory = getString(R.string.overweightText);
-				break;
-			case Obese1:
-				bmiCategory = getString(R.string.obese1Text);
-				break;
-			case Obese2:
-				bmiCategory = getString(R.string.obese2Text);
-				break;
-			case Obese3:
-				bmiCategory = getString(R.string.obese3Text);
-				break;
+		bmiOutputText.setText(String.format(getString(R.string.bmiFinalText), bmiVal, bmiCategory));
+	}
+
+	private boolean ValidateInputField(EditText editText, String errorHint, String defaultHint){
+		editText.setHint(defaultHint);
+		editText.setHintTextColor(getResources().getColor(R.color.hint_gray));
+
+		String str = editText.getText().toString();
+		if(str.equals("")){
+			editText.setHint(errorHint);
+			editText.setHintTextColor(getResources().getColor(R.color.hint_red));
+			return false;
 		}
-		bmiOutputText.setText(String.format(getString(R.string.bmiFinalText), String.valueOf(bmiVal), bmiCategory));
+		return true;
 	}
 }

@@ -19,5 +19,5 @@
     <string name="obese2Text">obese (Class II)</string>
     <string name="obese3Text">obese (Class III)</string>
 
-    <string name="bmiFinalText">Your BMI equals %s, you are %s</string>
+    <string name="bmiFinalText">Your BMI equals %.1f, you are %s</string>
 </resources>
