@@ -83,15 +83,25 @@ public class MainActivity extends AppCompatActivity {
 		String weightStr = weightInputField.getText().toString();
 		if(weightStr.equals("")){
 			bmiOutputText.setText(R.string.bmiValueText);
+			weightInputField.setHint(R.string.weightErrorText);
+			weightInputField.setHintTextColor(getResources().getColor(R.color.red));
 			return;
 		}
-		final float weightVal = Float.parseFloat(weightStr);
 
 		String heightStr = heightInputField.getText().toString();
 		if(heightStr.equals("")){
 			bmiOutputText.setText(R.string.bmiValueText);
+			heightInputField.setHint(R.string.heightErrorText);
+			heightInputField.setHintTextColor(getResources().getColor(R.color.red));
 			return;
 		}
+
+		weightInputField.setHint(R.string.weightHintText);
+		weightInputField.setHintTextColor(getResources().getColor(R.color.black));
+		heightInputField.setHint(R.string.heightHintText);
+		heightInputField.setHintTextColor(getResources().getColor(R.color.black));
+
+		final float weightVal = Float.parseFloat(weightStr);
 		final float heightVal = Float.parseFloat(heightInputField.getText().toString());
 
 		final float bmiVal = BMICalculator.CalculateBMIValue(weightVal, heightVal/100);

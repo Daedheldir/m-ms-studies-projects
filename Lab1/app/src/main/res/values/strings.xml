@@ -4,7 +4,9 @@
     <string name="weightText">Weight [kg]</string>
     <string name="heightText">Height [cm]</string>
     <string name="weightHintText">Input your weight</string>
+    <string name="weightErrorText">This field can\'t be empty!</string>
     <string name="heightHintText">Input your height</string>
+    <string name="heightErrorText">This field can\'t be empty!</string>
     <string name="bmiCalculateButtonText">Calculate BMI</string>
     <string name="bmiValueText">BMI Value</string>
 
