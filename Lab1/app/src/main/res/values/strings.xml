@@ -20,4 +20,11 @@
     <string name="obese3Text">obese (Class III)</string>
 
     <string name="bmiFinalText">Your BMI equals %.1f, you are %s</string>
+
+    <string name="optionsUnitSwitchMetric">Metric</string>
+    <string name="optionsUnitSwitchImperial">Imperial</string>
+    <string name="optionsUnitSwitch">Switch units:</string>
+
+    <string name="optionsViewCredits">Author Information</string>
+    <string name="creditsAuthorInformation">Copyright © 2022, Marcin Bernacki</string>
 </resources>
