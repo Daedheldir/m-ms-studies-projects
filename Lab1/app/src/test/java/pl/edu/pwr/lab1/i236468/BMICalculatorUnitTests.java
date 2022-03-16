@@ -11,13 +11,13 @@ import static org.junit.Assert.*;
  */
 public class BMICalculatorUnitTests {
 	@Test
-	public void bmiCalculationIsCorrect(){
+	public void bmiCalculationIsCorrect() {
 		assertEquals(2.5f, BMICalculator.CalculateBMIValue(10, 2), 0.01f);
 		assertEquals(Float.MAX_VALUE, BMICalculator.CalculateBMIValue(10, 0), 0.01f);
 	}
 
 	@Test
-	public void bmiCategoriesAreCorrect(){
+	public void bmiCategoriesAreCorrect() {
 		assertEquals(BMICalculator.BMICategories.Underweight3, BMICalculator.GetBMICategory(0.0f));
 
 		assertNotEquals(BMICalculator.BMICategories.Underweight3, BMICalculator.GetBMICategory(16.0f));
@@ -32,5 +32,19 @@ public class BMICalculatorUnitTests {
 		assertEquals(BMICalculator.BMICategories.Obese3, BMICalculator.GetBMICategory(40.0f));
 
 		assertEquals(BMICalculator.BMICategories.Obese3, BMICalculator.GetBMICategory(Float.MAX_VALUE));
+	}
+
+	@Test
+	public void weightValidationIsCorrect() {
+		assertFalse(BMICalculator.IsWeightValid(-1));
+		assertFalse(BMICalculator.IsWeightValid(BMICalculator.GetWeightMax() + 1));
+		assertTrue(BMICalculator.IsWeightValid(80));
+	}
+
+	@Test
+	public void heightValidationIsCorrect() {
+		assertFalse(BMICalculator.IsHeightValid(BMICalculator.GetHeightMin() - 1));
+		assertFalse(BMICalculator.IsHeightValid(BMICalculator.GetHeightMax() + 1));
+		assertTrue(BMICalculator.IsHeightValid(BMICalculator.GetHeightMin() + 1));
 	}
 }
