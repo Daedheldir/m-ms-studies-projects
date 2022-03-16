@@ -10,6 +10,56 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.EnumMap;
 
+/* TODO ASSIGNMENT
+>1. (1 p.) Write app which use all methods from activity lifecycle and log them using
+logcat Log.d(). Example:
+ @Override
+ protected void onStart() {
+ super.onStart();
+ Log.d("TAG", "The onStart() event");
+ }
+Check their behavior for actions like switching the app, rotation and others typical
+for phone user.
+
+2. Write BMI application:
+The app collect data about mass and height and allow user to count his/her BMI.
+>• (1p.) Implement layout similar to:
+>• (2p.) Add logic to button which valid both fields and count BMI when they
+	are correct or shows error in other case. BMI counter should be separate
+	class which is used in activity, it can also validate values of mass and height.
+	Hint: EditText has inputType attribute which allow to define what
+	kinds of data user can put in, for example number.
+
+• (2p.) Add options menu (onCreateOptionsMenu() in Activity), which
+	allow to switch between metric and imperial type of data. Add required
+	support.
+
+• (1p.) Add option in menu which shows information about author in
+	separate activity.
+
+• (1p.) Text field which display BMI should change the color according to
+	BMI classification (normal, overweight, etc.)
+
+• (2p.) After click on BMI_VALUE text field user should see new activity with
+	BMI value and description according to BMI classification.
+	Hint: use startActivityForResult() to share value of BMI with new
+	activity
+
+• (1p.) Write unit test for both BMI counters (imperial and metric). You can
+	use KotlinTest or Junit.
+
+• (1p.) Write or record (and cleanup) UI test using Espresso.
+
+Assessment (regarding all labs)
+	• Code should be written according to SOLID principles.
+	• Code should be written in clean way (readable and without hardcoded values.
+	• All Strings variables which are visible for user (in UI) should be stored in
+	strings.xml.
+	• Margins and paddings should be stored in dimens.xml.
+	• UI should be nice and clean. Material design preferred.
+	• Code of application should be delivered as link to github repository via email.
+	• Ready app should be presented during laboratories according to lab schedule.
+ */
 public class MainActivity extends AppCompatActivity {
 	private final EnumMap<BMICalculator.BMICategories, String> bmiCategoriesLUT = new EnumMap<>(BMICalculator.BMICategories.class);
 	protected EditText weightInputField;
@@ -80,7 +130,12 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		final float weightVal = Float.parseFloat(weightStr);
-		final float heightVal = Float.parseFloat(heightInputField.getText().toString());
+		final float heightVal = Float.parseFloat(heightStr);
+
+		if(!BMICalculator.IsHeightValid(heightVal) || !BMICalculator.IsWeightValid(weightVal)){
+			bmiOutputText.setText(R.string.bmiValueText);
+			return;
+		}
 
 		final float bmiVal = BMICalculator.CalculateBMIValue(weightVal, heightVal/100);
 
