@@ -1,44 +1,59 @@
 package pl.edu.pwr.lab1.i236468;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Button;
+
+import java.util.Objects;
 
 public class OptionsActivity extends AppCompatActivity {
-	private Toolbar toolbar;
+	private SwitchCompat switchCompat;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_options);
 
-		// Attaching the layout to the toolbar object
-		toolbar = (Toolbar) findViewById(R.id.options_toolbar);
-		// Setting toolbar as the ActionBar with setSupportActionBar() call
+		Toolbar toolbar = (Toolbar) findViewById(R.id.options_toolbar);
+
 		setSupportActionBar(toolbar);
+		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
+		getSupportActionBar().setTitle("");
+
+		switchCompat = findViewById(R.id.switch_units);
+		switchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> SettingsManager.SetMetricDimensions(!isChecked));
+
+		Button button_authorInfo = findViewById(R.id.button_author_info);
+		button_authorInfo.setOnClickListener(view -> {
+			Intent intent = new Intent(this, CreditsActivity.class);
+			startActivity(intent);
+		});
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu_options, menu);
-		return true;
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_back) {
+		if (id == android.R.id.home) {
+			Log.d("TESTING", "Options - Pressed back button");
+			finish();
 			return true;
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onResume(){
+		super.onResume();
+		switchCompat.setChecked(!SettingsManager.IsMetricDimensions());
 	}
 }

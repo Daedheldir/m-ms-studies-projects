@@ -7,7 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="red">#FFFF0000</color>
-    <color name="hint_red">#FFFF8888</color>
-    <color name="hint_gray">#FF78989C</color>
+    <color name="hint_red">#99FF8888</color>
+    <color name="hint_gray">#9978989C</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="bmi_underweight3">#FF082E79</color>
+    <color name="bmi_underweight2">#FF4169E1</color>
+    <color name="bmi_underweight1">#FFACE1AF</color>
+    <color name="bmi_normalRange">#FFCDEBA7</color>
+    <color name="bmi_overweight">#FFFFFF99</color>
+    <color name="bmi_obese1">#FFFDE456</color>
+    <color name="bmi_obese2">#FFCF2929</color>
+    <color name="bmi_obese3">#FF801818</color>
 </resources>

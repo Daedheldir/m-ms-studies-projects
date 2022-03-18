@@ -6,4 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".CreditsActivity">
 
+    <include
+        android:id="@+id/credits_toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView_authorInfo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/creditsAuthorInformation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/credits_toolbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

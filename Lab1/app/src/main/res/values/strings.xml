@@ -1,12 +1,17 @@
 <resources>
     <string name="app_name">Lab1</string>
 
-    <string name="weightText">Weight [kg]</string>
-    <string name="heightText">Height [cm]</string>
+    <string name="weightText">Weight</string>
+    <string name="weightUnitsText_metric">[kg]</string>
+    <string name="weightUnitsText_imperial">[lb]</string>
+    <string name="heightText">Height</string>
+    <string name="heightUnitsText_metric">[cm]</string>
+    <string name="heightUnitsText_imperial">[in]</string>
     <string name="weightHintText">Input your weight</string>
-    <string name="weightErrorText">This field can\'t be empty!</string>
     <string name="heightHintText">Input your height</string>
-    <string name="heightErrorText">This field can\'t be empty!</string>
+    <string name="fieldEmptyErrorText">This field can\'t be empty!</string>
+    <string name="fieldValueTooLowErrorText">Minimum value for this field is %.1f!</string>
+    <string name="fieldValueTooHighErrorText">Maximum value for this field is %.1f!</string>
     <string name="bmiCalculateButtonText">Calculate BMI</string>
     <string name="bmiValueText">BMI Value</string>
 
@@ -19,7 +24,7 @@
     <string name="obese2Text">obese (Class II)</string>
     <string name="obese3Text">obese (Class III)</string>
 
-    <string name="bmiFinalText">Your BMI equals %.1f, you are %s</string>
+    <string name="bmiFinalText">Your BMI is equal to %.1f, you are %s</string>
 
     <string name="optionsUnitSwitchMetric">Metric</string>
     <string name="optionsUnitSwitchImperial">Imperial</string>
@@ -27,4 +32,6 @@
 
     <string name="optionsViewCredits">Author Information</string>
     <string name="creditsAuthorInformation">Copyright © 2022, Marcin Bernacki</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
