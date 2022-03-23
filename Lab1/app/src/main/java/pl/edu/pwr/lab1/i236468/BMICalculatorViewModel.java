@@ -152,7 +152,7 @@ public class BMICalculatorViewModel extends ViewModel {
 		Integer unboxingTemp = bmiColorsLUT.get(bmiCategory);
 		int bmiColor = unboxingTemp == null ? 0xFFFFFFFF : unboxingTemp;
 
-		bmiOutputText.setText(String.valueOf(bmiVal));
+		bmiOutputText.setText(String.format("%.1f", bmiVal));
 		bmiOutputText.setTextColor(bmiColor);
 
 		return true;

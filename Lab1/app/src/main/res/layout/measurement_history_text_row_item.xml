@@ -14,7 +14,8 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/weightText" />
+        android:text="@string/weightText"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/recycler_row_heightTextView"
@@ -23,7 +24,8 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/heightText" />
+        android:text="@string/heightText"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/recycler_row_bmiTextView"
@@ -32,6 +34,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/bmiValueText" />
+        android:text="@string/bmiValueText"
+        android:textSize="24sp" />
 
 </LinearLayout>

@@ -14,7 +14,7 @@ public class MeasurementsHistoryStorage implements Serializable {
 
 	public static void AddMeasurement(final Triple<String, String, Float> newMeasurement){
 		savedMeasurements.add(0, newMeasurement);
-		while (savedMeasurements.size() > 3){
+		while (savedMeasurements.size() > 10){
 			savedMeasurements.remove(savedMeasurements.size() - 1);
 		}
 	}
