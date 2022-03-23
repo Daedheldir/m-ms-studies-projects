@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar_template"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/colorPrimary"
-    android:minHeight="?attr/actionBarSize"
+    android:elevation="4dp"
     android:gravity="center_vertical|start"
+    android:minHeight="?attr/actionBarSize"
     android:theme="?attr/actionBarTheme"
-    android:elevation="4dp">
+    app:title="@string/app_name">
 
     <androidx.appcompat.widget.ActionMenuView
         android:id="@+id/amvMenu"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="start"/>
+        android:layout_gravity="start" />
 </androidx.appcompat.widget.Toolbar>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OptionsActivity">
+    tools:context=".activities.OptionsActivity">
 
     <include
         android:id="@+id/options_toolbar"
@@ -23,7 +23,7 @@
             android:gravity="start">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/recycler_row_heightTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/optionsUnitSwitch" />
@@ -49,6 +49,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/optionsUnitSwitchImperial" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/button_saved_measurements"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/optionsSavedMeasurements" />
         </TableRow>
 
         <TableRow

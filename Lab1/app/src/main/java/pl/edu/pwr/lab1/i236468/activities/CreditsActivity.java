@@ -1,14 +1,15 @@
-package pl.edu.pwr.lab1.i236468;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ActionMenuView;
-import androidx.appcompat.widget.Toolbar;
+package pl.edu.pwr.lab1.i236468.activities;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import java.util.Objects;
+
+import pl.edu.pwr.lab1.i236468.R;
 
 public class CreditsActivity extends AppCompatActivity {
 
@@ -21,8 +22,9 @@ public class CreditsActivity extends AppCompatActivity {
 
 		setSupportActionBar(toolbar);
 		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowTitleEnabled(true);
 		getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
-		getSupportActionBar().setTitle("");
+		getSupportActionBar().setTitle(R.string.credits_toolbarTitle);
 	}
 
 	@Override

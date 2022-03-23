@@ -1,34 +1,16 @@
 package pl.edu.pwr.lab1.i236468;
 
 public class BMICalculatorImperial implements IBMICalculator {
-	private boolean bmiCalculated = false;
 	private final float weightMax;
 	private final float weightMin;
 	private final float heightMax;
 	private final float heightMin;
-	private float lastWeight = 0.0f;
-	private float lastHeight = 0.0f;
 
 	public BMICalculatorImperial(float weightMin, float weightMax, float heightMin, float heightMax){
 		this.weightMax = weightMax;
 		this.heightMax = heightMax;
 		this.weightMin = weightMin;
 		this.heightMin = heightMin;
-	}
-
-	@Override
-	public boolean IsBMICalculated() {
-		return bmiCalculated;
-	}
-
-	@Override
-	public float GetLastWeight() {
-		return lastWeight;
-	}
-
-	@Override
-	public float GetLastHeight() {
-		return lastHeight;
 	}
 
 	@Override
@@ -43,13 +25,8 @@ public class BMICalculatorImperial implements IBMICalculator {
 
 	@Override
 	public float CalculateBMIValue(float weight, float height) {
-		bmiCalculated = false;
 		if (height == 0)
 			return Float.NaN;
-
-		lastWeight = weight;
-		lastHeight = height;
-		bmiCalculated = true;
 
 		return 703 * weight / (height * height);
 	}}

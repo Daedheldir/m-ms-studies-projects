@@ -5,8 +5,8 @@
     <item type="string" format="float" name="weightMin_imperial">1.0</item>
     <item type="string" format="float" name="weightMax_imperial">1433.0</item>
 
-    <item type="string" format="float" name="heightMin_metric">55.0</item>
-    <item type="string" format="float" name="heightMax_metric">300.0</item>
+    <item type="string" format="float" name="heightMin_metric">0.55</item>
+    <item type="string" format="float" name="heightMax_metric">3.00</item>
     <item type="string" format="float" name="heightMin_imperial">21.65</item>
     <item type="string" format="float" name="heightMax_imperial">118.1</item>
 </resources>

@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
+import pl.edu.pwr.lab1.i236468.enums.EBMICategories;
+
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -15,7 +17,7 @@ public class BMICalculatorMetricUnitTests {
 	public void bmiCalculationIsCorrect() {
 		BMICalculatorMetric bmiCalculatorMetric = new BMICalculatorMetric(0,10,0,10);
 
-		assertEquals(2.5f, bmiCalculatorMetric.CalculateBMIValue(10, 200.0f), 0.01f);
+		assertEquals(2.5f, bmiCalculatorMetric.CalculateBMIValue(10, 2.00f), 0.01f);
 		assertEquals(Float.NaN, bmiCalculatorMetric.CalculateBMIValue(10, 0), 0.01f);
 	}
 

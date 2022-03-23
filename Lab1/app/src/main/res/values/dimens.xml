@@ -5,4 +5,8 @@
     <dimen name="mainActivityInputTextSize">24sp</dimen>
     <dimen name="mainActivityButtonTextSize">24sp</dimen>
     <dimen name="mainActivityBMIOutputTextSize">36sp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="margin_measurements_history_row_item">16dp</dimen>
 </resources>

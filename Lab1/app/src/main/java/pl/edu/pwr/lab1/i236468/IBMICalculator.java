@@ -1,9 +1,8 @@
 package pl.edu.pwr.lab1.i236468;
 
+import pl.edu.pwr.lab1.i236468.enums.EBMICategories;
+
 public interface IBMICalculator {
-	boolean IsBMICalculated();
-	float GetLastWeight();
-	float GetLastHeight();
 	float GetWeightMax();
 	float GetWeightMin();
 	float GetHeightMax();

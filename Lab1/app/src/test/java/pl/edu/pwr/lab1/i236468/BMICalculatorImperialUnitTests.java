@@ -5,6 +5,9 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
+import pl.edu.pwr.lab1.i236468.enums.EBMICategories;
+import pl.edu.pwr.lab1.i236468.utilities.UnitConversionUtility;
+
 public class BMICalculatorImperialUnitTests {
 	@Test
 	public void bmiCalculationIsCorrect() {

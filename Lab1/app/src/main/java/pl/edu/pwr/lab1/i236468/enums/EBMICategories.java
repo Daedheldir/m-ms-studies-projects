@@ -1,4 +1,4 @@
-package pl.edu.pwr.lab1.i236468;
+package pl.edu.pwr.lab1.i236468.enums;
 
 public enum EBMICategories {
 	Underweight3,

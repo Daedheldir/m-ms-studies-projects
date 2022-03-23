@@ -3,15 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/layout-w936dp/content_scrolling.xml" value="0.211328125" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/layout/activity_credits.xml" value="0.30885416666666665" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/layout/activity_main.xml" value="0.20969202898550723" />
+        <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/layout/activity_measurements_history.xml" value="0.42916666666666664" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/layout/activity_options.xml" value="0.5" />
+        <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/layout/bmi_display_popup_window.xml" value="0.28177083333333336" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/layout/fragment_bmi_display.xml" value="0.23020833333333332" />
+        <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/layout/measurement_history_text_row_item.xml" value="0.41510416666666666" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/layout/menu_options.xml" value="0.30416666666666664" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/layout/toolbar.xml" value="0.30416666666666664" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/layout/toolbar_main.xml" value="0.30416666666666664" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/layout/toolbar_menu.xml" value="0.30416666666666664" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/menu/menu_main.xml" value="0.30416666666666664" />
+        <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/menu/menu_measurements_history.xml" value="0.42916666666666664" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/menu/menu_options.xml" value="0.30416666666666664" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2365" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab1/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2365" />
