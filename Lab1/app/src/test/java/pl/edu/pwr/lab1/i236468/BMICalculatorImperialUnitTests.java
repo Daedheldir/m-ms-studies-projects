@@ -40,6 +40,7 @@ public class BMICalculatorImperialUnitTests {
 		assertEquals(EBMICategories.Obese3, bmiCalculatorMetric.GetBMICategory(Float.MAX_VALUE));
 	}
 
+
 	@Test
 	public void weightValidationIsCorrect() {
 		BMICalculatorImperial bmiCalculatorMetric = new BMICalculatorImperial(0,5,0,5);

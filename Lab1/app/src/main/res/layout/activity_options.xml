@@ -15,29 +15,37 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mainActivityLayoutSpacing"
+        android:layout_marginEnd="@dimen/mainActivityLayoutSpacing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/options_toolbar">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="start">
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|fill_vertical">
 
             <TextView
-                android:id="@+id/recycler_row_heightTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/optionsUnitSwitch" />
+                android:layout_weight="1"
+                android:text="@string/optionsUnitSwitch"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/optionsUnitSwitchMetric" />
+                android:layout_weight="0"
+                android:text="@string/optionsUnitSwitchMetric"
+                android:textSize="20sp" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_units"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
                 android:gravity="start"
                 android:scaleX="1"
                 android:scaleY="1"
@@ -48,8 +56,11 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/optionsUnitSwitchImperial" />
+                android:layout_weight="0"
+                android:text="@string/optionsUnitSwitchImperial"
+                android:textSize="20sp" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
