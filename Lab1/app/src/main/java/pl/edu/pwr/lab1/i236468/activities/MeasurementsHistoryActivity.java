@@ -3,6 +3,7 @@ package pl.edu.pwr.lab1.i236468.activities;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -35,6 +36,12 @@ public class MeasurementsHistoryActivity extends AppCompatActivity {
 		getSupportActionBar().setTitle(R.string.measurements_history_toolbarTitle);
 
 		dataRecyclerView = findViewById(R.id.recyclerView_measurements_history);
+
+		Button button_clearSavedData = findViewById(R.id.button_clearSavedData);
+		button_clearSavedData.setOnClickListener(v -> {
+			MeasurementsHistoryStorage.ClearSavedMeasurements();
+			onResume();
+		});
 	}
 	@Override
 	protected void onResume(){

@@ -42,4 +42,5 @@
     <string name="options_toolbarTitle">Options</string>
     <string name="measurements_history_toolbarTitle">Measurements History</string>
     <string name="credits_toolbarTitle">Credits</string>
+    <string name="clear_saved_data">Clear saved data</string>
 </resources>

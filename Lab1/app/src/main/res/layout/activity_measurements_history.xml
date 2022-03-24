@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
+    <Button
+        android:id="@+id/button_clearSavedData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/mainActivityLayoutSpacing"
+        android:text="@string/clear_saved_data"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerView_measurements_history"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <include
         android:id="@+id/savedMeasure_toolbar"
         layout="@layout/toolbar"
@@ -26,5 +36,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/savedMeasure_textRow" />
+        app:layout_constraintTop_toBottomOf="@+id/savedMeasure_textRow">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

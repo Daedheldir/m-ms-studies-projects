@@ -18,4 +18,8 @@ public class MeasurementsHistoryStorage implements Serializable {
 			savedMeasurements.remove(savedMeasurements.size() - 1);
 		}
 	}
+
+	public static void ClearSavedMeasurements(){
+		savedMeasurements.clear();
+	}
 }

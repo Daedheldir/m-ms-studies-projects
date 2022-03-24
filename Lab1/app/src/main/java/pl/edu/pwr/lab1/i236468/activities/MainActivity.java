@@ -128,6 +128,26 @@ public class MainActivity extends AppCompatActivity {
 				));
 			}
 		});
+
+		SharedPreferences sharedPref = getSharedPreferences(getString(R.string.savedMeasurementsFileKey), Context.MODE_PRIVATE);
+		int savedMeasurementsAmount = sharedPref.getInt(getString(R.string.savedMeasurementsFileAmount), -1);
+
+		MeasurementsHistoryStorage.ClearSavedMeasurements();
+		//loading from last to first, because adding to keep things in order after adding to measurements history
+		for(int i = savedMeasurementsAmount-1; i >= 0; --i){
+			String weight = sharedPref.getString(getString(R.string.savedMeasurementsFileWeightKey) + String.valueOf(i), "-1.0");
+			String height = sharedPref.getString(getString(R.string.savedMeasurementsFileHeightKey) + String.valueOf(i), "-1.0");
+			float bmi = sharedPref.getFloat(getString(R.string.savedMeasurementsFileBMIKey) + String.valueOf(i), -1.0f);
+
+			if(weight.equals("-1.0") || height.equals("-1.0") || bmi == -1.0f)
+				continue;
+
+			MeasurementsHistoryStorage.AddMeasurement(new Triple<>(
+					weight,
+					height,
+					bmi
+			));
+		}
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -156,24 +176,6 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onStart(){
 		super.onStart();
-		SharedPreferences sharedPref = getSharedPreferences(getString(R.string.savedMeasurementsFileKey), Context.MODE_PRIVATE);
-		int savedMeasurementsAmount = sharedPref.getInt(getString(R.string.savedMeasurementsFileAmount), -1);
-
-		//loading from last to first, because adding to keep things in order after adding to measurements history
-		for(int i = savedMeasurementsAmount-1; i >= 0; --i){
-			String weight = sharedPref.getString(getString(R.string.savedMeasurementsFileWeightKey) + String.valueOf(i), "-1.0");
-			String height = sharedPref.getString(getString(R.string.savedMeasurementsFileHeightKey) + String.valueOf(i), "-1.0");
-			float bmi = sharedPref.getFloat(getString(R.string.savedMeasurementsFileBMIKey) + String.valueOf(i), -1.0f);
-
-			if(weight.equals("-1.0") || height.equals("-1.0") || bmi == -1.0f)
-				continue;
-
-			MeasurementsHistoryStorage.AddMeasurement(new Triple<>(
-					weight,
-					height,
-					bmi
-			));
-		}
 		Log.d("TESTING", "The onStart() event");
 	}
 	@Override
