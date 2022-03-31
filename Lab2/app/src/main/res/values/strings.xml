@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Lab2</string>
+    <string name="title">Title</string>
+    <string name="title_input_hint">Input task title</string>
+    <string name="description">Description</string>
+    <string name="description_input_hint">Input task description</string>
+</resources>
