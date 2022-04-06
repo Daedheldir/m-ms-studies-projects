@@ -1,26 +1,24 @@
 package pl.edu.pwr.lab1.lab2;
 
-import android.graphics.drawable.Icon;
+import android.graphics.drawable.Drawable;
 
 import java.util.Date;
 
 import pl.edu.pwr.lab1.lab2.enums.TaskTypes;
 
 public class Task {
+	private final Drawable taskIcon;
 	private final TaskTypes taskType;
 	private final String title;
 	private final String description;
 	private final Date dueDate;
 	private boolean taskDone;
 
-	Task(TaskTypes taskType, final String title, final String description, Date dueDate){
-		this.taskType = taskType;
-		this.title = title;
-		this.description = description;
-		this.dueDate = dueDate;
-		this.taskDone = false;
+	Task(Drawable taskIcon, TaskTypes taskType, final String title, final String description, Date dueDate){
+		this(taskIcon, taskType, title, description, dueDate, false);
 	}
-	Task(TaskTypes taskType, final String title, final String description, Date dueDate, boolean taskDone){
+	Task(Drawable taskIcon, TaskTypes taskType, final String title, final String description, Date dueDate, boolean taskDone){
+		this.taskIcon = taskIcon;
 		this.taskType = taskType;
 		this.title = title;
 		this.description = description;
@@ -50,5 +48,9 @@ public class Task {
 
 	public void setTaskDone(boolean taskDone) {
 		this.taskDone = taskDone;
+	}
+
+	public Drawable getTaskIcon() {
+		return taskIcon;
 	}
 }

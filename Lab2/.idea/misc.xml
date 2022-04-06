@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab2/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.341" />
+        <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab2/app/src/main/res/drawable/ic_baseline_task_groceries_24.xml" value="0.341" />
+        <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab2/app/src/main/res/drawable/ic_baseline_task_todo_24.xml" value="0.341" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab2/app/src/main/res/layout/activity_add_task.xml" value="0.358695652173913" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab2/app/src/main/res/layout/activity_main.xml" value="0.23020833333333332" />
+        <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab2/app/src/main/res/layout/activity_task_preview.xml" value="0.23020833333333332" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab2/app/src/main/res/layout/row_item_recycler_view_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab2/app/src/main/res/layout/task_popup.xml" value="0.23020833333333332" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab2/app/src/main/res/layout/toolbar.xml" value="0.358695652173913" />
         <entry key="..\:/Programming/source/repos/AndroidStudio/MobileAndMultimediaSystems/Lab2/app/src/main/res/menu/menu_main.xml" value="0.42916666666666664" />
       </map>

@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">Lab2</string>
+    <string name="task_type">Task type</string>
+    <string name="task_type_hint">Input task type</string>
     <string name="title">Title</string>
     <string name="title_input_hint">Input task title</string>
     <string name="description">Description</string>
     <string name="description_input_hint">Input task description</string>
+    <string name="due_date">Due Date</string>
+    <string name="due_date_input_hint">Input task due date</string>
+    <string name="add_task_button">Add Task</string>
+    <string name="task_not_done">Not Done</string>
+    <string name="task_done">Done</string>
+    <string name="task_icon">Task Icon</string>
 </resources>

@@ -3,21 +3,20 @@ package pl.edu.pwr.lab1.lab2;
 import java.util.ArrayList;
 
 public class TaskManager {
-	ArrayList<Task> currentTasks;
+	static ArrayList<Task> currentTasks = new ArrayList<>();
 
-	public TaskManager(){
-		currentTasks = new ArrayList<>();
-	}
-
-	public void addNewTask(Task newTask){
+	public static void addNewTask(Task newTask){
 		currentTasks.add(newTask);
 	}
 
-	public final Task getTaskAt(int position){
+	public static Task getTaskAt(int position){
 		return currentTasks.get(position);
 	}
 
-	public final int getTasksAmount(){
+	public static void removeTaskAt(int position){
+		currentTasks.remove(position);
+	}
+	public static int getTasksAmount(){
 		return currentTasks.size();
 	}
 
