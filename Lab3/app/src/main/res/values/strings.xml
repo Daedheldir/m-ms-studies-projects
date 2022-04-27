@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Lab3</string>
+    <string name="select_image">Select Image</string>
+    <string name="image">Image</string>
+    <string name="text_found_in_image">Text found in image:</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="none">None</string>
+    <string name="labels_found_in_image">Labels found in image:</string>
 </resources>
