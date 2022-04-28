@@ -2,6 +2,7 @@ package pl.edu.pwr.lab3.i236468;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -42,6 +43,7 @@ import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -78,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
 	 *
 	 * If the app does not has permission then the user will be prompted to grant permissions
 	 *
-	 * @param activity
 	 */
 	public static void verifyStoragePermissions(Activity activity) {
 		// Check if we have write permission
@@ -117,9 +118,14 @@ public class MainActivity extends AppCompatActivity {
 
 					try {
 						File file = new File(lastPhotoPath);
-						Uri imageUri = FileProvider.getUriForFile(getApplicationContext(), "pl.edu.pwr.lab3.i236468.fileprovider", file);
+						Uri imageUri = FileProvider.getUriForFile(
+								getApplicationContext(),
+								"pl.edu.pwr.lab3.i236468.fileprovider",
+								file);
 
-						Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+						Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(
+								this.getContentResolver(),
+								imageUri);
 
 						int rotateImage = getCameraPhotoOrientation(this, imageUri, lastPhotoPath);
 						imageView.setRotation(rotateImage);
@@ -135,13 +141,15 @@ public class MainActivity extends AppCompatActivity {
 		ImageLabelerOptions  labelerOptions = new ImageLabelerOptions.Builder().setConfidenceThreshold(0.7F).build();
 		autoMLImageLabeler = ImageLabeling.getClient(labelerOptions);
 		textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+
 		// Multiple object detection in static images
 		ObjectDetectorOptions objectDetectorOptions =
 				new ObjectDetectorOptions.Builder()
 						.setDetectorMode(ObjectDetectorOptions.SINGLE_IMAGE_MODE)
 						.enableMultipleObjects()
-						.enableClassification()  // Optional
+						.enableClassification()
 						.build();
+
 		objectDetector = ObjectDetection.getClient(objectDetectorOptions);
 
 		Button button_openGallery = findViewById(R.id.button_selectImage);
@@ -160,14 +168,15 @@ public class MainActivity extends AppCompatActivity {
 		super.onDestroy();
 	}
 	private Bitmap getImageFromGalleryData(ActivityResult result){
+		if (result.getData() == null) return null;
+
+		Uri selectedImageUri = result.getData().getData();
+		int rotateImage = getCameraPhotoOrientation(this, selectedImageUri, lastPhotoPath);
+		imageView.setRotation(rotateImage);
+
 		try {
-			if (result.getData() != null) {
-				Uri selectedImageUri = result.getData().getData();
-				int rotateImage = getCameraPhotoOrientation(this, selectedImageUri, lastPhotoPath);
-				imageView.setRotation(rotateImage);
-				return BitmapFactory.decodeStream(getBaseContext().getContentResolver().openInputStream(selectedImageUri));
-			}
-		} catch (Exception exception) {
+			return BitmapFactory.decodeStream(getBaseContext().getContentResolver().openInputStream(selectedImageUri));
+		} catch (FileNotFoundException exception) {
 			Log.d("TAG", "" + exception.getLocalizedMessage());
 		}
 		return null;
@@ -179,7 +188,12 @@ public class MainActivity extends AppCompatActivity {
 		autoMLImageLabeler.process(image).addOnSuccessListener(imageLabels -> {
 			StringBuilder tag = new StringBuilder();
 			for (ImageLabel label : imageLabels) {
-				tag.append(String.format(Locale.getDefault(), "%s - %.2f %c\n", label.getText(), label.getConfidence()*100.0f, '%'));
+				tag.append(String.format(
+						Locale.getDefault(),
+						"%s - %.2f %c\n",
+						label.getText(),
+						label.getConfidence()*100.0f,
+						'%'));
 			}
 			imageTagText.setText(tag);
 		}).addOnFailureListener(e -> Log.wtf("TEST", e));
@@ -189,7 +203,9 @@ public class MainActivity extends AppCompatActivity {
 
 		textRecognizer.process(image)
 				.addOnSuccessListener( visionText -> {
-					foundTextText.setText(visionText.getText().equals("") ? getResources().getText(R.string.none) : visionText.getText());
+					String noneTextStr = getResources().getText(R.string.none).toString();
+					String foundTextStr = visionText.getText().equals("") ? noneTextStr : visionText.getText();
+					foundTextText.setText(foundTextStr);
 				})
 				.addOnFailureListener(e -> Log.wtf("TEST", e));
 	}
@@ -202,79 +218,79 @@ public class MainActivity extends AppCompatActivity {
 		Canvas canvas = new Canvas(tempBitmap);
 		canvas.drawBitmap(bitmap, 0, 0, null);
 
-		objectDetector.process(image)
-				.addOnSuccessListener(
-						detectedObjects -> {
-							//draw found objects
-							for (DetectedObject detectedObject : detectedObjects) {
-								Rect boundingBox = detectedObject.getBoundingBox();
-								Integer trackingId = detectedObject.getTrackingId();
-								int red= r.nextInt(255);
-								int green =r.nextInt(255);
-								int blue = r.nextInt(255);
-								int color = (255 << 24) | (red << 16) | (green << 8) | blue;
+		objectDetector.process(image).addOnSuccessListener(detectedObjects -> {
+			//draw found objects
+			for (DetectedObject detectedObject : detectedObjects) {
+				Rect boundingBox = detectedObject.getBoundingBox();
 
-								paint.setColor(color);
-								paint.setStrokeWidth(5.f);
-								paint.setStyle(Paint.Style.STROKE);
+				int red= r.nextInt(255);
+				int green =r.nextInt(255);
+				int blue = r.nextInt(255);
+				int color = (255 << 24) | (red << 16) | (green << 8) | blue;
 
-								canvas.drawRoundRect(new RectF(boundingBox), 10.0f, 10.0f, paint);
+				paint.setColor(color);
+				paint.setStrokeWidth(5.f);
+				paint.setStyle(Paint.Style.STROKE);
 
-								for (DetectedObject.Label label : detectedObject.getLabels()) {
-									float confidence = label.getConfidence();
+				canvas.drawRoundRect(new RectF(boundingBox), 10.0f, 10.0f, paint);
 
-									String text = String.format(Locale.getDefault(), "%s %.2f%c",label.getText(), 100*confidence, '%');
-									float[] rectBottomCenter = {boundingBox.centerX(), boundingBox.bottom + 50};
-									paint.setTextAlign(Paint.Align.CENTER);
-									paint.setStyle(Paint.Style.FILL);
-									paint.setTextSize(80);
-									canvas.drawText(text, rectBottomCenter[0], rectBottomCenter[1], paint);
-									paint.setStyle(Paint.Style.STROKE);
-									paint.setStrokeWidth(4.f);
-									paint.setColor(255<<24);
-									canvas.drawText(text, rectBottomCenter[0], rectBottomCenter[1], paint);
-									break;
-								}
-							}
-						})
-				.addOnFailureListener(
-						e -> Log.wtf("TEST", e));
+				for (DetectedObject.Label label : detectedObject.getLabels()) {
+					float confidence = label.getConfidence();
+
+					String text = String.format(Locale.getDefault(), "%s %.2f%c", label.getText(), 100*confidence, '%');
+					float[] rectBottomCenter = {boundingBox.centerX(), boundingBox.bottom + 50};
+					paint.setTextAlign(Paint.Align.CENTER);
+					paint.setStyle(Paint.Style.FILL);
+					paint.setTextSize(80);
+					canvas.drawText(text, rectBottomCenter[0], rectBottomCenter[1], paint);
+					paint.setStyle(Paint.Style.STROKE);
+					paint.setStrokeWidth(4.f);
+					paint.setColor(255<<24);
+					canvas.drawText(text, rectBottomCenter[0], rectBottomCenter[1], paint);
+					break;
+				}
+			}
+		}).addOnFailureListener(e -> Log.wtf("TEST", e));
 
 		imageView.setImageDrawable(new BitmapDrawable(getResources(), tempBitmap));
 	}
+
 	private void pickImage(){
 		Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 		startForResultFromGallery.launch(intent);
 	}
 
 	private void openCamera(){
-		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		// Create the File where the photo should go
+		Uri photoFile = null;
+		try {
+			photoFile = createImageFile();
+		} catch (IOException ex) {
+			// Error occurred while creating the File
+			Log.e("TAG", "IOException when creating file: " + ex.getLocalizedMessage());
+			ex.printStackTrace();
+		}
 
-		if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-			// Create the File where the photo should go
-			Uri photoFile = null;
-			try {
-				photoFile = createImageFile();
-			} catch (IOException ex) {
-				// Error occurred while creating the File
-				Log.i("TAG", "IOException when creating file: " + ex.getLocalizedMessage());
-				ex.printStackTrace();
-			}
-			// Continue only if the File was successfully created
-			if (photoFile != null) {
-				takePictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-				takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile);
-				startForResultFromCamera.launch(takePictureIntent);
-			}
+		// Continue only if the File was successfully created
+		if (photoFile == null) return;
+
+		try {
+			Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+			takePictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+			takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile);
+			startForResultFromCamera.launch(takePictureIntent);
+		} catch (ActivityNotFoundException ex){
+			Log.e("TAG", "ActivityNotFoundException when opening camera: " + ex.getLocalizedMessage());
 		}
 	}
-	public int getCameraPhotoOrientation(Context context, Uri imageUri,
-										 String imagePath) {
+	public int getCameraPhotoOrientation(Context context, Uri imageUri, String imagePath)
+	{
 		int rotate = 0;
 		try {
 			context.getContentResolver().notifyChange(imageUri, null);
 			File imageFile = new File(imagePath);
 			ExifInterface exif = new ExifInterface(imageFile.getAbsolutePath());
+
 			int orientation = exif.getAttributeInt(
 					ExifInterface.TAG_ORIENTATION,
 					ExifInterface.ORIENTATION_NORMAL);
@@ -293,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
 
 			Log.i("RotateImage", "Exif orientation: " + orientation);
 			Log.i("RotateImage", "Rotate value: " + rotate);
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return rotate;
@@ -301,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
 
 	private Uri createImageFile() throws IOException {
 		// Create an image file name
-		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
 		String imageFileName = "img_" + timeStamp + "_";
 		File image = new File(getExternalFilesDir("my_images"),
 				imageFileName+".jpg"
