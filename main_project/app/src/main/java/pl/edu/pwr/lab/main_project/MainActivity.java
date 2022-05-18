@@ -55,7 +55,11 @@ public class MainActivity extends FragmentActivity {
 		@NonNull
 		@Override
 		public Fragment createFragment(int position) {
-			return new ToursFragment();
+			switch (position){
+				case 0:  return ToursFragment.newInstance();
+				case 1:  return PlacesFragment.newInstance();
+				default: return ToursFragment.newInstance();
+			}
 		}
 
 		@Override
@@ -65,7 +69,6 @@ public class MainActivity extends FragmentActivity {
 	}
 	private ViewPager2 viewPager;
 	private FragmentStateAdapter pagerAdapter;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,5 +96,4 @@ public class MainActivity extends FragmentActivity {
 			viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
 		}
 	}
-
 }
