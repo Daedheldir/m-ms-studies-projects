@@ -33,7 +33,6 @@ import android.os.Bundle;
 //		d. Map with tour
 
 public class MainActivity extends AppCompatActivity {
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
