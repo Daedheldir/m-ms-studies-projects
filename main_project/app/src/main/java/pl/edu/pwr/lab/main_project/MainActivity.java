@@ -1,8 +1,20 @@
 package pl.edu.pwr.lab.main_project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 //Functional Requirements
 //	1. App should provide information about specific city including events( min. 3), places (min 5) and accommodation(min 3).
@@ -32,10 +44,54 @@ import android.os.Bundle;
 //		c. List of places to visit
 //		d. Map with tour
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
+	private static class MyPagerAdapter extends FragmentStateAdapter {
+
+		public MyPagerAdapter(FragmentActivity fragment) {
+			super(fragment);
+		}
+
+
+		@NonNull
+		@Override
+		public Fragment createFragment(int position) {
+			return new ToursFragment();
+		}
+
+		@Override
+		public int getItemCount() {
+			return 4;
+		}
+	}
+	private ViewPager2 viewPager;
+	private FragmentStateAdapter pagerAdapter;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		viewPager = findViewById(R.id.viewPager);
+		pagerAdapter = new MyPagerAdapter(this);
+		viewPager.setAdapter(pagerAdapter);
+
+		TabLayout tabLayout = findViewById(R.id.tab_layout);
+		new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText("OBJECT " + (position + 1))
+		).attach();
+
 	}
+
+	@Override
+	public void onBackPressed() {
+		if (viewPager.getCurrentItem() == 0) {
+			// If the user is currently looking at the first step, allow the system to handle the
+			// Back button. This calls finish() on this activity and pops the back stack.
+			super.onBackPressed();
+		} else {
+			// Otherwise, select the previous step.
+			viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+		}
+	}
+
 }
