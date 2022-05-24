@@ -28,6 +28,17 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0">
+
+            <WebView
+                android:id="@+id/events_row_item_webView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
         <TextView
             android:id="@+id/fragment_events_description_textView"
             android:layout_width="match_parent"

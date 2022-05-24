@@ -41,14 +41,6 @@
             android:padding="10dp"
             android:text="@string/lorem_ipsum" />
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView"
-            android:name="pl.edu.pwr.lab.main_project.MapsFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            tools:layout="@layout/fragment_maps" />
-
     </LinearLayout>
 
 </FrameLayout>

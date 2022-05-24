@@ -63,7 +63,7 @@ public class PlacesFragment extends Fragment {
 				return placeLayout;
 			}
 
-			public WebView getWebView() {return webView;}
+			public WebView getWebView() { return webView; }
 		}
 
 		public PlacesCustomAdapter(PlacesManager places) {
@@ -96,7 +96,7 @@ public class PlacesFragment extends Fragment {
 
 			viewHolder.getWebView().loadUrl("https://maps.googleapis.com/maps/api/" +
 					"staticmap?center=" + coordX +"," + coordY +
-					"&zoom=10" +
+					"&zoom=15" +
 					"&size=512x512" +
 					"&markers=color:blue%7C" + + coordX +"," + coordY +
 					"&key="+apikey);

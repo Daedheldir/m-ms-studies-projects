@@ -7,13 +7,17 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import pl.edu.pwr.lab.main_project.R;
+import pl.edu.pwr.lab.main_project.places.Place;
 import pl.edu.pwr.lab.main_project.places.PlacesFragment;
 
 
@@ -44,13 +48,54 @@ public class ToursFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		WebView myWebView = view.findViewById(R.id.webview);
-		myWebView.getSettings().setJavaScriptEnabled(true);
+		WebView webView = view.findViewById(R.id.webview);
+		webView.getSettings().setLoadWithOverviewMode(true);
+		webView.getSettings().setUseWideViewPort(true);
+
 		String apikey = getString(R.string.maps_api_key);
 
-		myWebView.loadUrl("https://maps.googleapis.com/maps/api/" +
-				"staticmap?center=Berkeley,CA" +
-				"&zoom=14&size=400x400" +
+		ArrayList<Pair<Float,Float>> placesCoords = new ArrayList<>();
+		for(Place place : ToursManager.getInstance().get(0).getPlacesList()){
+			placesCoords.add(place.getLocationCoords());
+		}
+
+		StringBuilder placesCoordsStr = new StringBuilder();
+		ArrayList<Pair<Float, Float>> tourCoordsOrganized = new ArrayList<>();
+
+		tourCoordsOrganized.add(placesCoords.get(0));
+
+		for(int i =0; i < placesCoords.size()-1; ++i){
+			Pair<Float, Float> currentPlace = tourCoordsOrganized.get(tourCoordsOrganized.size() -1);
+			Pair<Float, Float> closestPlace = placesCoords.get(0);
+
+			float lowestDistance = Float.MAX_VALUE;
+
+			for(int j = 0; j < placesCoords.size(); ++j){
+				Pair<Float, Float> testedPlace = placesCoords.get(j);
+
+				if(currentPlace == testedPlace) continue;
+
+				float distance = (float)Math.sqrt(Math.pow(currentPlace.first - testedPlace.first, 2) + Math.pow(currentPlace.second - testedPlace.second, 0));
+
+				if(distance < lowestDistance && !tourCoordsOrganized.contains(testedPlace)){
+					lowestDistance = distance;
+					closestPlace = testedPlace;
+				}
+			}
+			tourCoordsOrganized.add(closestPlace);
+		}
+
+		for(Pair<Float, Float> place : tourCoordsOrganized) {
+			placesCoordsStr.append(place.first).append(",").append(place.second).append("|");
+		}
+
+		placesCoordsStr.deleteCharAt(placesCoordsStr.lastIndexOf("|"));
+
+		webView.loadUrl("https://maps.googleapis.com/maps/api/" +
+				"staticmap?" +
+				"&size=512x512" +
+				"&markers=color:blue%7C" + placesCoordsStr.toString() +
+				"&path=weight:5|color:0xAAAAFFCC|geodesic:true|" + placesCoordsStr.toString() +
 				"&key="+apikey);
 	}
 }

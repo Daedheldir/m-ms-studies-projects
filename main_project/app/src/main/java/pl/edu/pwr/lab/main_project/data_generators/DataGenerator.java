@@ -11,6 +11,7 @@ import pl.edu.pwr.lab.main_project.R;
 import pl.edu.pwr.lab.main_project.Review;
 import pl.edu.pwr.lab.main_project.accommodations.Accommodation;
 import pl.edu.pwr.lab.main_project.events.Event;
+import pl.edu.pwr.lab.main_project.guided_tours.Tour;
 import pl.edu.pwr.lab.main_project.places.Place;
 import pl.edu.pwr.lab.main_project.places.PlacesManager;
 
@@ -36,7 +37,9 @@ public class DataGenerator {
 	}
 	public static Place createSemiRandomPlace(String name, String description){
 		Random r = new Random();
-		Pair<Float, Float> placeCoords = new Pair<>(r.nextFloat() * 50, r.nextFloat() * 50);
+		Pair<Float, Float> placeCoords = new Pair<>(
+				51.107883f + 0.08f - r.nextFloat() * 0.16f,
+				17.038538f + 0.08f - r.nextFloat() * 0.16f);
 		ArrayList<Review> placeReviews = new ArrayList<>();
 
 		for(int i =0; i < 5; ++i){
@@ -61,14 +64,12 @@ public class DataGenerator {
 
 		return createSemiRandomPlace(placeName, placeDescription);
 	}
-
 	public static Review createRandomReview(){
 		Review review = new Review(
 				Rating.newStarRating(Rating.RATING_5_STARS, new Random().nextFloat() * 5),
 				"Review description: " + LoremIpsumStringGenerator.getLoremSubstring(10));
 		return review;
 	}
-
 	public static Pair<Accommodation, Place> createRandomAccomodationPlacePair(){
 		String accomodationName = "Accomodation \"" + LoremIpsumStringGenerator.getLoremRandomWord() + "\"";
 		String accommodationDescription = accomodationName+ " description:  " + LoremIpsumStringGenerator.getLoremSubstring(10);
@@ -92,5 +93,25 @@ public class DataGenerator {
 		);
 
 		return new Pair<>(accommodation, place);
+	}
+	public static Tour createRandomTour(){
+		int placesCount = PlacesManager.getInstance().getCount();
+		int visits = Math.min(placesCount, 5);
+
+		ArrayList<Place> placesToVisit = new ArrayList<>();
+		Random r = new Random();
+		for(int i = 0; i < visits; ++i){
+			placesToVisit.add(PlacesManager.getInstance().get(r.nextInt(placesCount)));
+		}
+
+		String tourName = "Tour \"" + LoremIpsumStringGenerator.getLoremRandomWord() + "\"";
+		StringBuilder tourDescription = new StringBuilder("Tour which visits places: ");
+		for(Place place : placesToVisit){
+			tourDescription.append(place.getName()).append(", ");
+		}
+		tourDescription.replace(tourDescription.lastIndexOf(","), tourDescription.length() - 1, "");
+
+		Tour tour = new Tour(tourName, tourDescription.toString(), placesToVisit);
+		return tour;
 	}
 }

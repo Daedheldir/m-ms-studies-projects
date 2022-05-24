@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,10 +42,14 @@ public class EventsFragment extends Fragment {
 				eventLayout = view.findViewById(R.id.events_row_item_linearLayout);
 				eventNameText = view.findViewById(R.id.fragment_events_name_textView);
 				eventDescriptionText = view.findViewById(R.id.fragment_events_description_textView);
+				webView = view.findViewById(R.id.events_row_item_webView);
+				webView.getSettings().setLoadWithOverviewMode(true);
+				webView.getSettings().setUseWideViewPort(true);
 			}
 			private final LinearLayout eventLayout;
 			private final TextView eventNameText;
 			private final TextView eventDescriptionText;
+			private final WebView webView;
 
 			public TextView getEventNameText() {
 				return eventNameText;
@@ -57,6 +62,8 @@ public class EventsFragment extends Fragment {
 			public LinearLayout getEventLayout(){
 				return eventLayout;
 			}
+			public WebView getWebView() { return webView; }
+
 		}
 
 		public EventsCustomAdapter(EventsManager eventsManager) {
@@ -80,6 +87,17 @@ public class EventsFragment extends Fragment {
 			viewHolder.getEventNameText().setText(event.getName());
 			viewHolder.getEventDescriptionText().setText(event.getDescription());
 			viewHolder.getEventLayout().setOnClickListener(view -> openEventPreview(view, position));
+
+			float coordX = event.getPlace().getLocationCoords().first;
+			float coordY = event.getPlace().getLocationCoords().second;
+			String apikey = getString(R.string.maps_api_key);
+
+			viewHolder.getWebView().loadUrl("https://maps.googleapis.com/maps/api/" +
+					"staticmap?center=" + coordX +"," + coordY +
+					"&zoom=15" +
+					"&size=512x512" +
+					"&markers=color:blue%7C" + + coordX +"," + coordY +
+					"&key="+apikey);
 		}
 		private void openEventPreview(View view, int index){
 			Intent intent = new Intent(view.getContext(), EventPreviewActivity.class);

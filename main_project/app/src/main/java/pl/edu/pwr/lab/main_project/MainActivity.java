@@ -19,7 +19,9 @@ import pl.edu.pwr.lab.main_project.data_generators.DataGenerator;
 import pl.edu.pwr.lab.main_project.events.Event;
 import pl.edu.pwr.lab.main_project.events.EventsFragment;
 import pl.edu.pwr.lab.main_project.events.EventsManager;
+import pl.edu.pwr.lab.main_project.guided_tours.Tour;
 import pl.edu.pwr.lab.main_project.guided_tours.ToursFragment;
+import pl.edu.pwr.lab.main_project.guided_tours.ToursManager;
 import pl.edu.pwr.lab.main_project.places.Place;
 import pl.edu.pwr.lab.main_project.places.PlacesFragment;
 import pl.edu.pwr.lab.main_project.places.PlacesManager;
@@ -86,6 +88,7 @@ public class MainActivity extends FragmentActivity {
 		AccommodationsManager accommodationsManager = AccommodationsManager.getInstance();
 		PlacesManager placesManager = PlacesManager.getInstance();
 		EventsManager eventsManager = EventsManager.getInstance();
+		ToursManager toursManager = ToursManager.getInstance();
 
 		for(int i = 0; i < 5; ++i){
 			Pair<Accommodation, Place> accommodationPlacePair = DataGenerator.createRandomAccomodationPlacePair();
@@ -104,6 +107,10 @@ public class MainActivity extends FragmentActivity {
 			placesManager.add(place);
 		}
 
+		for(int i =0; i < 5; ++i){
+			Tour tour = DataGenerator.createRandomTour();
+			toursManager.add(tour);
+		}
 		viewPager = findViewById(R.id.viewPager);
 		pagerAdapter = new MyPagerAdapter(this);
 		viewPager.setAdapter(pagerAdapter);
