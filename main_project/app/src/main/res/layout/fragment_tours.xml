@@ -7,12 +7,10 @@
     android:orientation="vertical"
     tools:context=".guided_tours.ToursFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <WebView
+        android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0"
-        android:src="@drawable/ic_launcher_background" />
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:layout_width="match_parent"

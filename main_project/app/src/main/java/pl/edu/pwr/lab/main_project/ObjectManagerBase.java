@@ -18,7 +18,7 @@ public class ObjectManagerBase<T1> {
 			if (recyclerView == null) {
 				continue;
 			}
-			recyclerView.getRecycledViewPool().clear();
+			//recyclerView.getRecycledViewPool().clear();
 
 			if(recyclerView.getLayoutManager() != null)
 				 recyclerView.getLayoutManager().removeAllViews();

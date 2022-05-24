@@ -43,7 +43,7 @@
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="0">
 
         <LinearLayout
@@ -93,10 +93,15 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
+    <WebView
+        android:id="@+id/place_preview_webView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:isIndicator="true"
+        android:minHeight="400dp" />
 
 </LinearLayout>

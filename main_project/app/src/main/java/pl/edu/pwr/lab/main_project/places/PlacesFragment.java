@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -21,7 +24,7 @@ import pl.edu.pwr.lab.main_project.data_generators.DataGenerator;
 public class PlacesFragment extends Fragment {
 	private class PlacesCustomAdapter extends RecyclerView.Adapter<PlacesCustomAdapter.ViewHolder> {
 
-		private PlacesManager localPlacesManager;
+		private final PlacesManager localPlacesManager;
 
 		/**
 		 * Provide a reference to the type of views that you are using
@@ -34,11 +37,15 @@ public class PlacesFragment extends Fragment {
 				placeNameText = view.findViewById(R.id.fragment_places_name_textView);
 				placeRatingBar = view.findViewById(R.id.fragment_places_ratingBar);
 				placeDescriptionText = view.findViewById(R.id.fragment_places_description_textView);
+				webView = view.findViewById(R.id.places_row_item_webView);
+				webView.getSettings().setLoadWithOverviewMode(true);
+				webView.getSettings().setUseWideViewPort(true);
 			}
 			private final LinearLayout placeLayout;
 			private final TextView placeNameText;
 			private final RatingBar placeRatingBar;
 			private final TextView placeDescriptionText;
+			private final WebView webView;
 
 			public TextView getPlaceNameText() {
 				return placeNameText;
@@ -55,6 +62,8 @@ public class PlacesFragment extends Fragment {
 			public LinearLayout getPlaceLayout(){
 				return placeLayout;
 			}
+
+			public WebView getWebView() {return webView;}
 		}
 
 		public PlacesCustomAdapter(PlacesManager places) {
@@ -80,6 +89,18 @@ public class PlacesFragment extends Fragment {
 			viewHolder.getPlaceRatingBar().setRating(place.getAverageRating());
 			viewHolder.getPlaceDescriptionText().setText(place.getDescription());
 			viewHolder.getPlaceLayout().setOnClickListener(view -> openPlacePreview(view, position));
+
+			float coordX = place.getLocationCoords().first;
+			float coordY = place.getLocationCoords().second;
+			String apikey = getString(R.string.maps_api_key);
+
+			viewHolder.getWebView().loadUrl("https://maps.googleapis.com/maps/api/" +
+					"staticmap?center=" + coordX +"," + coordY +
+					"&zoom=10" +
+					"&size=512x512" +
+					"&markers=color:blue%7C" + + coordX +"," + coordY +
+					"&key="+apikey);
+
 		}
 		private void openPlacePreview(View view, int index){
 			Intent intent = new Intent(view.getContext(), PlacePreviewActivity.class);
