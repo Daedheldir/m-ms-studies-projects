@@ -1,6 +1,6 @@
-package pl.edu.pwr.lab.main_project;
+package pl.edu.pwr.lab.main_project.events;
 
-import android.media.Image;
+import pl.edu.pwr.lab.main_project.places.Place;
 
 //		a. Name of event
 //		b. Event description

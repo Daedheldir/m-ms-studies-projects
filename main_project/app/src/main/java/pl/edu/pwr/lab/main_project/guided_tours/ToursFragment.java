@@ -1,4 +1,4 @@
-package pl.edu.pwr.lab.main_project;
+package pl.edu.pwr.lab.main_project.guided_tours;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+
+import pl.edu.pwr.lab.main_project.R;
 
 
 public class ToursFragment extends Fragment {

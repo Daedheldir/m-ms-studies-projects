@@ -1,4 +1,4 @@
-package pl.edu.pwr.lab.main_project;
+package pl.edu.pwr.lab.main_project.places;
 
 import android.media.Image;
 import android.media.Rating;
@@ -7,6 +7,8 @@ import android.provider.MediaStore;
 import androidx.core.util.Pair;
 
 import java.util.List;
+
+import pl.edu.pwr.lab.main_project.Review;
 
 //		a. Name of place
 //		b. Description
@@ -64,7 +66,14 @@ public class Place {
 	public List<Review> getReviews() {
 		return reviews;
 	}
-
+	public float getAverageRating(){
+		float avgRating = 0;
+		for(Review review : getReviews()){
+			avgRating += review.getRating().getStarRating();
+		}
+		avgRating /= getReviews().size();
+		return avgRating;
+	}
 	private void setReviews(List<Review> reviews){
 		this.reviews = reviews;
 	}

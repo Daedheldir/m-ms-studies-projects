@@ -9,7 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Main_project">
-
+        <activity
+            android:name=".accommodations.AccommodationPreviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".events.EventPreviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".places.PlacePreviewActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

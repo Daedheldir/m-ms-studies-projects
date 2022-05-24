@@ -1,11 +1,12 @@
-package pl.edu.pwr.lab.main_project;
+package pl.edu.pwr.lab.main_project.accommodations;
 
 import android.media.Image;
 import android.media.Rating;
 
-import androidx.core.util.Pair;
-
 import java.util.List;
+
+import pl.edu.pwr.lab.main_project.Review;
+import pl.edu.pwr.lab.main_project.places.Place;
 
 //	5. Accommodation module should include:
 //		a. Name
@@ -13,13 +14,15 @@ import java.util.List;
 //		c. Rate and rating functionality with review description
 //		d. Place location (with map/direction)
 //		e. Images. (up to 3)
-public class Accomodation {
+public class Accommodation {
 
-	private String name;
-	private String description;
-	private List<Review> reviews;
-	private String place;
-	private List<Image> images;
+	public Accommodation(String name, String description, List<Review> reviews, Place place, List<Image> images){
+		this.name = name;
+		this.description = description;
+		this.reviews = reviews;
+		this.place = place;
+		this.images=images;
+	}
 
 	public String getName() {
 		return name;
@@ -45,16 +48,23 @@ public class Accomodation {
 	public List<Review> getReviews() {
 		return reviews;
 	}
-
+	public float getAverageRating(){
+		float avgRating = 0;
+		for(Review review : getReviews()){
+			avgRating += review.getRating().getStarRating();
+		}
+		avgRating /= getReviews().size();
+		return avgRating;
+	}
 	private void setReviews(List<Review> reviews){
 		this.reviews = reviews;
 	}
 
-	public String getPlace() {
+	public Place getPlace() {
 		return place;
 	}
 
-	public void setPlace(String place) {
+	public void setPlace(Place place) {
 		this.place = place;
 	}
 
@@ -65,4 +75,10 @@ public class Accomodation {
 	private void setImages(List<Image> images){
 		this.images = images;
 	}
+
+	private String name;
+	private String description;
+	private List<Review> reviews;
+	private Place place;
+	private List<Image> images;
 }

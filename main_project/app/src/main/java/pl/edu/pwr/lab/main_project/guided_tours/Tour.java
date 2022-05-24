@@ -1,4 +1,4 @@
-package pl.edu.pwr.lab.main_project;
+package pl.edu.pwr.lab.main_project.guided_tours;
 
 //	6. Guided tour should include
 //		a. Name
@@ -7,6 +7,8 @@ package pl.edu.pwr.lab.main_project;
 //		d. Map with tour
 
 import java.util.List;
+
+import pl.edu.pwr.lab.main_project.places.Place;
 
 public class Tour {
 

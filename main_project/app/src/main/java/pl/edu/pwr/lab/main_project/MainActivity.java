@@ -1,20 +1,28 @@
 package pl.edu.pwr.lab.main_project;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.lifecycle.Lifecycle;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.os.Bundle;
-
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import pl.edu.pwr.lab.main_project.accommodations.Accommodation;
+import pl.edu.pwr.lab.main_project.accommodations.AccommodationsFragment;
+import pl.edu.pwr.lab.main_project.accommodations.AccommodationsManager;
+import pl.edu.pwr.lab.main_project.data_generators.DataGenerator;
+import pl.edu.pwr.lab.main_project.events.Event;
+import pl.edu.pwr.lab.main_project.events.EventsFragment;
+import pl.edu.pwr.lab.main_project.events.EventsManager;
+import pl.edu.pwr.lab.main_project.guided_tours.ToursFragment;
+import pl.edu.pwr.lab.main_project.places.Place;
+import pl.edu.pwr.lab.main_project.places.PlacesFragment;
+import pl.edu.pwr.lab.main_project.places.PlacesManager;
 
 //Functional Requirements
 //	1. App should provide information about specific city including events( min. 3), places (min 5) and accommodation(min 3).
@@ -51,13 +59,13 @@ public class MainActivity extends FragmentActivity {
 			super(fragment);
 		}
 
-
 		@NonNull
 		@Override
 		public Fragment createFragment(int position) {
 			switch (position){
-				case 0:  return ToursFragment.newInstance();
+				case 0:  return EventsFragment.newInstance();
 				case 1:  return PlacesFragment.newInstance();
+				case 2:  return AccommodationsFragment.newInstance();
 				default: return ToursFragment.newInstance();
 			}
 		}
@@ -75,12 +83,38 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		AccommodationsManager accommodationsManager = AccommodationsManager.getInstance();
+		PlacesManager placesManager = PlacesManager.getInstance();
+		EventsManager eventsManager = EventsManager.getInstance();
+
+		for(int i = 0; i < 5; ++i){
+			Pair<Accommodation, Place> accommodationPlacePair = DataGenerator.createRandomAccomodationPlacePair();
+			placesManager.add(accommodationPlacePair.second);
+			accommodationsManager.add(accommodationPlacePair.first);
+		}
+
+		for(int i = 0; i < 5; ++i){
+			Pair<Event, Place> eventPlacePair = DataGenerator.createRandomEventPlacePair();
+			placesManager.add(eventPlacePair.second);
+			eventsManager.add(eventPlacePair.first);
+		}
+
+		for(int i = 0; i < 5; ++i){
+			Place place = DataGenerator.createRandomPlace();
+			placesManager.add(place);
+		}
+
 		viewPager = findViewById(R.id.viewPager);
 		pagerAdapter = new MyPagerAdapter(this);
 		viewPager.setAdapter(pagerAdapter);
-
+		String[] tabLayoutTitlesLUT = {
+			"Events",
+			"Places",
+			"Accommodation",
+			"Tours"
+		};
 		TabLayout tabLayout = findViewById(R.id.tab_layout);
-		new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText("OBJECT " + (position + 1))
+		new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(tabLayoutTitlesLUT[position])
 		).attach();
 
 	}
