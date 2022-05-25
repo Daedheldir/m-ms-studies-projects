@@ -8,9 +8,14 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.List;
 
@@ -37,6 +42,7 @@ public class PlacePreviewActivity extends AppCompatActivity {
 		placeNameText.setText(place.getName());
 		placeDescriptionText.setText(place.getDescription());
 
+		addVideoToView(place);
 		addImagesToView(place);
 		InitializeRecyclerView(place);
 		InitializeWebView(place);
@@ -67,7 +73,18 @@ public class PlacePreviewActivity extends AppCompatActivity {
 				"&markers=color:blue%7C" + + coordX +"," + coordY +
 				"&key="+apikey);
 	}
-
+	private void addVideoToView(Place place){
+		YouTubePlayerView youtubePlayerView = findViewById(R.id.youtube_player_view);
+		getLifecycle().addObserver(youtubePlayerView);
+		youtubePlayerView.setPadding(5,5,5,5);
+		youtubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+			@Override
+			public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+				String videoUrl = place.getVideoFilepath();
+				youTubePlayer.cueVideo(videoUrl, 0);
+			}
+		});
+	}
 	private void addImagesToView(Place place) {
 		List<String> imgUrls = place.getImageUrls();
 		LinearLayout imagesLayout = findViewById(R.id.places_preview_imgs_layout);

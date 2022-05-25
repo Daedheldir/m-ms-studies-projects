@@ -66,6 +66,9 @@ public class DataGenerator {
 			leftPlacesImg.remove(r.nextInt(leftPlacesImg.size()));
 		}
 
+		String[] video_ids = context.getResources().getStringArray(R.array.videos_youtube_ids);
+
+
 		Place place = new Place(
 				name,
 				description,
@@ -73,7 +76,7 @@ public class DataGenerator {
 				placeReviews,
 				placeCoords,
 				leftPlacesImg,
-				""
+				video_ids[r.nextInt(video_ids.length)]
 		);
 
 		return place;

@@ -40,4 +40,12 @@
         <item>https://wallpaperaccess.com/full/2489838.jpg</item>
         <item>https://wallpaperaccess.com/full/2489895.jpg</item>
     </string-array>
+    <string-array name="videos_youtube_ids">
+        <item>acE1UZhf2Ck</item>
+        <item>oAGJYE8DvQU</item>
+        <item>0mmkNMXoD34</item>
+        <item>fHt1wh6htmg</item>
+        <item>tCiLgbHGhnw</item>
+        <item>eDSK-XP6R08</item>
+    </string-array>
 </resources>

@@ -13,7 +13,7 @@ import pl.edu.pwr.lab.main_project.Review;
 //		c. Voice description (recording or read by assistant)
 //		>d. Rate and rating functionality with review description
 //		>e. Place location (with map/direction)
-//		f. Images (up to 5)
+//		>f. Images (up to 5)
 //		g. Video (up to 30s)
 public class Place {
 
