@@ -1,16 +1,15 @@
 package pl.edu.pwr.lab.main_project.places;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
 import android.webkit.WebView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import pl.edu.pwr.lab.main_project.R;
+import pl.edu.pwr.lab.main_project.ReviewsRecyclerViewAdapter;
 
 public class PlacePreviewActivity extends AppCompatActivity {
 
@@ -21,7 +20,6 @@ public class PlacePreviewActivity extends AppCompatActivity {
 
 		TextView placeNameText = findViewById(R.id.places_preview_name_textView);
 		TextView placeDescriptionText = findViewById(R.id.places_preview_description_textView);
-		RatingBar placeRatingBar = findViewById(R.id.places_preview_ratingBar);
 
 		if(!getIntent().hasExtra("placeIndex")) {
 			return;
@@ -30,7 +28,10 @@ public class PlacePreviewActivity extends AppCompatActivity {
 		place = PlacesManager.getInstance().get(index);
 		placeNameText.setText(place.getName());
 		placeDescriptionText.setText(place.getDescription());
-		placeRatingBar.setRating(place.getAverageRating());
+
+		RecyclerView recyclerView = findViewById(R.id.places_preview_recyclerView);
+		recyclerView.setAdapter(new ReviewsRecyclerViewAdapter(place.getReviews()));
+		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 		WebView webView;
 		webView = findViewById(R.id.place_preview_webView);

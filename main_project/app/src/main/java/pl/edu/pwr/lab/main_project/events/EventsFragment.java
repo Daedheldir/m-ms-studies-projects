@@ -1,25 +1,17 @@
 package pl.edu.pwr.lab.main_project.events;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import pl.edu.pwr.lab.main_project.R;
-import pl.edu.pwr.lab.main_project.data_generators.DataGenerator;
-import pl.edu.pwr.lab.main_project.places.Place;
-import pl.edu.pwr.lab.main_project.places.PlacesManager;
+import pl.edu.pwr.lab.main_project.RecyclerViewViewHolder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,43 +20,9 @@ import pl.edu.pwr.lab.main_project.places.PlacesManager;
  */
 public class EventsFragment extends Fragment {
 
-	private class EventsCustomAdapter extends RecyclerView.Adapter<EventsCustomAdapter.ViewHolder> {
+	private class EventsCustomAdapter extends RecyclerView.Adapter<RecyclerViewViewHolder> {
 
 		private EventsManager localEventsManager;
-
-		/**
-		 * Provide a reference to the type of views that you are using
-		 * (custom ViewHolder).
-		 */
-		public class ViewHolder extends RecyclerView.ViewHolder {
-			public ViewHolder(View view) {
-				super(view);
-				eventLayout = view.findViewById(R.id.events_row_item_linearLayout);
-				eventNameText = view.findViewById(R.id.fragment_events_name_textView);
-				eventDescriptionText = view.findViewById(R.id.fragment_events_description_textView);
-				webView = view.findViewById(R.id.events_row_item_webView);
-				webView.getSettings().setLoadWithOverviewMode(true);
-				webView.getSettings().setUseWideViewPort(true);
-			}
-			private final LinearLayout eventLayout;
-			private final TextView eventNameText;
-			private final TextView eventDescriptionText;
-			private final WebView webView;
-
-			public TextView getEventNameText() {
-				return eventNameText;
-			}
-
-			public TextView getEventDescriptionText() {
-				return eventDescriptionText;
-			}
-
-			public LinearLayout getEventLayout(){
-				return eventLayout;
-			}
-			public WebView getWebView() { return webView; }
-
-		}
 
 		public EventsCustomAdapter(EventsManager eventsManager) {
 			localEventsManager = eventsManager;
@@ -72,21 +30,23 @@ public class EventsFragment extends Fragment {
 
 		// Create new views (invoked by the layout manager)
 		@Override
-		public EventsCustomAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+		public RecyclerViewViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 			// Create a new view, which defines the UI of the list item
 			View view = LayoutInflater.from(viewGroup.getContext())
-					.inflate(R.layout.events_row_item, viewGroup, false);
+					.inflate(R.layout.recyler_row_item, viewGroup, false);
 
-			return new EventsCustomAdapter.ViewHolder(view);
+			return new RecyclerViewViewHolder(view);
 		}
 
 		@Override
-		public void onBindViewHolder(EventsCustomAdapter.ViewHolder viewHolder, final int position) {
+		public void onBindViewHolder(RecyclerViewViewHolder viewHolder, final int position) {
 			Event event = localEventsManager.get(position);
 
-			viewHolder.getEventNameText().setText(event.getName());
-			viewHolder.getEventDescriptionText().setText(event.getDescription());
-			viewHolder.getEventLayout().setOnClickListener(view -> openEventPreview(view, position));
+			viewHolder.getNameText().setText(event.getName());
+			viewHolder.getDescriptionText().setText(event.getDescription());
+
+			viewHolder.getRatingBar().setEnabled(false);
+			viewHolder.getRatingBar().setVisibility(View.GONE);
 
 			float coordX = event.getPlace().getLocationCoords().first;
 			float coordY = event.getPlace().getLocationCoords().second;
@@ -98,11 +58,6 @@ public class EventsFragment extends Fragment {
 					"&size=512x512" +
 					"&markers=color:blue%7C" + + coordX +"," + coordY +
 					"&key="+apikey);
-		}
-		private void openEventPreview(View view, int index){
-			Intent intent = new Intent(view.getContext(), EventPreviewActivity.class);
-			intent.putExtra("eventIndex", index);
-			startActivity(intent);
 		}
 
 		// Return the size of your dataset (invoked by the layout manager)

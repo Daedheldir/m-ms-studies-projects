@@ -7,7 +7,6 @@ import androidx.core.util.Pair;
 import java.util.ArrayList;
 import java.util.Random;
 
-import pl.edu.pwr.lab.main_project.R;
 import pl.edu.pwr.lab.main_project.Review;
 import pl.edu.pwr.lab.main_project.accommodations.Accommodation;
 import pl.edu.pwr.lab.main_project.events.Event;
@@ -107,7 +106,7 @@ public class DataGenerator {
 		String tourName = "Tour \"" + LoremIpsumStringGenerator.getLoremRandomWord() + "\"";
 		StringBuilder tourDescription = new StringBuilder("Tour which visits places: ");
 		for(Place place : placesToVisit){
-			tourDescription.append(place.getName()).append(", ");
+			tourDescription.append("\n- ").append(place.getName()).append(", ");
 		}
 		tourDescription.replace(tourDescription.lastIndexOf(","), tourDescription.length() - 1, "");
 

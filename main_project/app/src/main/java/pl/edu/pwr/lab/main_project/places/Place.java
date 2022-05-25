@@ -1,8 +1,6 @@
 package pl.edu.pwr.lab.main_project.places;
 
-import android.media.Image;
 import android.media.Rating;
-import android.provider.MediaStore;
 
 import androidx.core.util.Pair;
 
@@ -10,11 +8,11 @@ import java.util.List;
 
 import pl.edu.pwr.lab.main_project.Review;
 
-//		a. Name of place
-//		b. Description
+//		>a. Name of place
+//		>b. Description
 //		c. Voice description (recording or read by assistant)
-//		d. Rate and rating functionality with review description
-//		e. Place location (with map/direction)
+//		>d. Rate and rating functionality with review description
+//		>e. Place location (with map/direction)
 //		f. Images (up to 5)
 //		g. Video (up to 30s)
 public class Place {

@@ -5,21 +5,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import pl.edu.pwr.lab.main_project.R;
 import pl.edu.pwr.lab.main_project.ObjectManagerBase;
-import pl.edu.pwr.lab.main_project.data_generators.DataGenerator;
-import pl.edu.pwr.lab.main_project.places.Place;
-import pl.edu.pwr.lab.main_project.places.PlacesManager;
+import pl.edu.pwr.lab.main_project.R;
+import pl.edu.pwr.lab.main_project.RecyclerViewViewHolder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,43 +22,10 @@ import pl.edu.pwr.lab.main_project.places.PlacesManager;
  */
 public class AccommodationsFragment extends Fragment {
 
-	private class AccommodationsCustomAdapter extends RecyclerView.Adapter<AccommodationsCustomAdapter.ViewHolder> {
+	private class AccommodationsCustomAdapter extends RecyclerView.Adapter<RecyclerViewViewHolder> {
 
 		private ObjectManagerBase<Accommodation> localAccommodationsManager;
 
-		/**
-		 * Provide a reference to the type of views that you are using
-		 * (custom ViewHolder).
-		 */
-		public class ViewHolder extends RecyclerView.ViewHolder {
-			public ViewHolder(View view) {
-				super(view);
-				accommodationLayout = view.findViewById(R.id.accommodations_row_item_linearLayout);
-				accommodationNameText = view.findViewById(R.id.fragment_accommodations_name_textView);
-				placeRatingBar = view.findViewById(R.id.fragment_accommodations_ratingBar);
-				accommodationDescriptionText = view.findViewById(R.id.fragment_accommodations_description_textView);
-			}
-			private final LinearLayout accommodationLayout;
-			private final TextView accommodationNameText;
-			private final RatingBar placeRatingBar;
-			private final TextView accommodationDescriptionText;
-
-			public TextView getAccommodationNameText() {
-				return accommodationNameText;
-			}
-
-			public TextView getAccommodationDescriptionText() {
-				return accommodationDescriptionText;
-			}
-
-			public RatingBar getPlaceRatingBar() {
-				return placeRatingBar;
-			}
-
-			public LinearLayout getAccommodationLayout(){
-				return accommodationLayout;
-			}
-		}
 
 		public AccommodationsCustomAdapter(ObjectManagerBase<Accommodation> accommodationsManager) {
 			localAccommodationsManager = accommodationsManager;
@@ -72,22 +33,24 @@ public class AccommodationsFragment extends Fragment {
 
 		// Create new views (invoked by the layout manager)
 		@Override
-		public AccommodationsCustomAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+		public RecyclerViewViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 			// Create a new view, which defines the UI of the list item
 			View view = LayoutInflater.from(viewGroup.getContext())
-					.inflate(R.layout.accommodations_row_item, viewGroup, false);
+					.inflate(R.layout.recyler_row_item, viewGroup, false);
 
-			return new AccommodationsCustomAdapter.ViewHolder(view);
+			return new RecyclerViewViewHolder(view);
 		}
 
 		@Override
-		public void onBindViewHolder(AccommodationsCustomAdapter.ViewHolder viewHolder, final int position) {
+		public void onBindViewHolder(RecyclerViewViewHolder viewHolder, final int position) {
 			Accommodation accommodation = localAccommodationsManager.get(position);
 
-			viewHolder.getAccommodationNameText().setText(accommodation.getName());
-			viewHolder.getAccommodationDescriptionText().setText(accommodation.getDescription());
-			viewHolder.getPlaceRatingBar().setRating(accommodation.getAverageRating());
-			viewHolder.getAccommodationLayout().setOnClickListener(view -> openAccommodationPreview(view, position));
+			viewHolder.getNameText().setText(accommodation.getName());
+			viewHolder.getDescriptionText().setText(accommodation.getDescription());
+			viewHolder.getRatingBar().setRating(accommodation.getAverageRating());
+			viewHolder.getLayout().setOnClickListener(view -> openAccommodationPreview(view, position));
+			viewHolder.getWebView().setEnabled(false);
+			viewHolder.getWebView().setVisibility(View.GONE);
 		}
 		private void openAccommodationPreview(View view, int index){
 			Intent intent = new Intent(view.getContext(), AccommodationPreviewActivity.class);

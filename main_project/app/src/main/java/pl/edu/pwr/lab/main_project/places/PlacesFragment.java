@@ -2,69 +2,22 @@ package pl.edu.pwr.lab.main_project.places;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.TextView;
-
 import pl.edu.pwr.lab.main_project.R;
-import pl.edu.pwr.lab.main_project.data_generators.DataGenerator;
+import pl.edu.pwr.lab.main_project.RecyclerViewViewHolder;
 
 public class PlacesFragment extends Fragment {
-	private class PlacesCustomAdapter extends RecyclerView.Adapter<PlacesCustomAdapter.ViewHolder> {
+	private class PlacesCustomAdapter extends RecyclerView.Adapter<RecyclerViewViewHolder> {
 
 		private final PlacesManager localPlacesManager;
-
-		/**
-		 * Provide a reference to the type of views that you are using
-		 * (custom ViewHolder).
-		 */
-		public class ViewHolder extends RecyclerView.ViewHolder {
-			public ViewHolder(View view) {
-				super(view);
-				placeLayout = view.findViewById(R.id.places_row_item_linearLayout);
-				placeNameText = view.findViewById(R.id.fragment_places_name_textView);
-				placeRatingBar = view.findViewById(R.id.fragment_places_ratingBar);
-				placeDescriptionText = view.findViewById(R.id.fragment_places_description_textView);
-				webView = view.findViewById(R.id.places_row_item_webView);
-				webView.getSettings().setLoadWithOverviewMode(true);
-				webView.getSettings().setUseWideViewPort(true);
-			}
-			private final LinearLayout placeLayout;
-			private final TextView placeNameText;
-			private final RatingBar placeRatingBar;
-			private final TextView placeDescriptionText;
-			private final WebView webView;
-
-			public TextView getPlaceNameText() {
-				return placeNameText;
-			}
-
-			public TextView getPlaceDescriptionText() {
-				return placeDescriptionText;
-			}
-
-			public RatingBar getPlaceRatingBar() {
-				return placeRatingBar;
-			}
-
-			public LinearLayout getPlaceLayout(){
-				return placeLayout;
-			}
-
-			public WebView getWebView() { return webView; }
-		}
 
 		public PlacesCustomAdapter(PlacesManager places) {
 			localPlacesManager = places;
@@ -72,23 +25,23 @@ public class PlacesFragment extends Fragment {
 
 		// Create new views (invoked by the layout manager)
 		@Override
-		public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+		public RecyclerViewViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 			// Create a new view, which defines the UI of the list item
 			View view = LayoutInflater.from(viewGroup.getContext())
-					.inflate(R.layout.places_row_item, viewGroup, false);
+					.inflate(R.layout.recyler_row_item, viewGroup, false);
 
-			return new ViewHolder(view);
+			return new RecyclerViewViewHolder(view);
 		}
 
 		// Replace the contents of a view (invoked by the layout manager)
 		@Override
-		public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+		public void onBindViewHolder(RecyclerViewViewHolder viewHolder, final int position) {
 			Place place = localPlacesManager.get(position);
 
-			viewHolder.getPlaceNameText().setText(place.getName());
-			viewHolder.getPlaceRatingBar().setRating(place.getAverageRating());
-			viewHolder.getPlaceDescriptionText().setText(place.getDescription());
-			viewHolder.getPlaceLayout().setOnClickListener(view -> openPlacePreview(view, position));
+			viewHolder.getNameText().setText(place.getName());
+			viewHolder.getRatingBar().setRating(place.getAverageRating());
+			viewHolder.getDescriptionText().setText(place.getDescription());
+			viewHolder.getLayout().setOnClickListener(view -> openPlacePreview(view, position));
 
 			float coordX = place.getLocationCoords().first;
 			float coordY = place.getLocationCoords().second;
@@ -98,7 +51,7 @@ public class PlacesFragment extends Fragment {
 					"staticmap?center=" + coordX +"," + coordY +
 					"&zoom=15" +
 					"&size=512x512" +
-					"&markers=color:blue%7C" + + coordX +"," + coordY +
+					"&markers=color:blue%7C" + coordX +"," + coordY +
 					"&key="+apikey);
 
 		}

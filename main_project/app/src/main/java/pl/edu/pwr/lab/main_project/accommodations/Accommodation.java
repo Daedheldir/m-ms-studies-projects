@@ -9,10 +9,10 @@ import pl.edu.pwr.lab.main_project.Review;
 import pl.edu.pwr.lab.main_project.places.Place;
 
 //	5. Accommodation module should include:
-//		a. Name
-//		b. Description
-//		c. Rate and rating functionality with review description
-//		d. Place location (with map/direction)
+//		>a. Name
+//		>b. Description
+//		>c. Rate and rating functionality with review description
+//		>d. Place location (with map/direction)
 //		e. Images. (up to 3)
 public class Accommodation {
 

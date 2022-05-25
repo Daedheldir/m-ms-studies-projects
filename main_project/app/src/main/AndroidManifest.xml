@@ -13,9 +13,6 @@
             android:name=".accommodations.AccommodationPreviewActivity"
             android:exported="false" />
         <activity
-            android:name=".events.EventPreviewActivity"
-            android:exported="false" />
-        <activity
             android:name=".places.PlacePreviewActivity"
             android:exported="false" />
         <!--
