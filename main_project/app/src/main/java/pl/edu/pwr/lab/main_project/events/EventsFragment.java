@@ -1,5 +1,6 @@
 package pl.edu.pwr.lab.main_project.events;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,7 @@ public class EventsFragment extends Fragment {
 
 	private class EventsCustomAdapter extends RecyclerView.Adapter<RecyclerViewViewHolder> {
 
-		private EventsManager localEventsManager;
+		private final EventsManager localEventsManager;
 
 		public EventsCustomAdapter(EventsManager eventsManager) {
 			localEventsManager = eventsManager;
@@ -47,6 +48,7 @@ public class EventsFragment extends Fragment {
 
 			viewHolder.getRatingBar().setEnabled(false);
 			viewHolder.getRatingBar().setVisibility(View.GONE);
+			viewHolder.getLayout().setOnClickListener(view -> openEventPreview(view, position));
 
 			float coordX = event.getPlace().getLocationCoords().first;
 			float coordY = event.getPlace().getLocationCoords().second;
@@ -58,6 +60,11 @@ public class EventsFragment extends Fragment {
 					"&size=512x512" +
 					"&markers=color:blue%7C" + + coordX +"," + coordY +
 					"&key="+apikey);
+		}
+		private void openEventPreview(View view, int index){
+			Intent intent = new Intent(view.getContext(), EventPreviewActivity.class);
+			intent.putExtra("eventIndex", index);
+			startActivity(intent);
 		}
 
 		// Return the size of your dataset (invoked by the layout manager)

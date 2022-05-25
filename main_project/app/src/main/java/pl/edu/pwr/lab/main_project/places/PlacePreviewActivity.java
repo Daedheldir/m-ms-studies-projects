@@ -1,15 +1,22 @@
 package pl.edu.pwr.lab.main_project.places;
 
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.webkit.WebView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import pl.edu.pwr.lab.main_project.R;
 import pl.edu.pwr.lab.main_project.ReviewsRecyclerViewAdapter;
+import pl.edu.pwr.lab.main_project.WebImageDownloader;
 
 public class PlacePreviewActivity extends AppCompatActivity {
 
@@ -25,14 +32,23 @@ public class PlacePreviewActivity extends AppCompatActivity {
 			return;
 		}
 		int index = getIntent().getIntExtra("placeIndex", 0);
-		place = PlacesManager.getInstance().get(index);
+		Place place = PlacesManager.getInstance().get(index);
+
 		placeNameText.setText(place.getName());
 		placeDescriptionText.setText(place.getDescription());
 
+		addImagesToView(place);
+		InitializeRecyclerView(place);
+		InitializeWebView(place);
+	}
+
+	private void InitializeRecyclerView(Place place) {
 		RecyclerView recyclerView = findViewById(R.id.places_preview_recyclerView);
 		recyclerView.setAdapter(new ReviewsRecyclerViewAdapter(place.getReviews()));
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
+	}
 
+	private void InitializeWebView(Place place) {
 		WebView webView;
 		webView = findViewById(R.id.place_preview_webView);
 
@@ -52,5 +68,23 @@ public class PlacePreviewActivity extends AppCompatActivity {
 				"&key="+apikey);
 	}
 
-	private Place place;
+	private void addImagesToView(Place place) {
+		List<String> imgUrls = place.getImageUrls();
+		LinearLayout imagesLayout = findViewById(R.id.places_preview_imgs_layout);
+
+		for(int i = 0; i < imgUrls.size(); ++i){
+			LayoutParams imParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+			ImageView image = new ImageView(imagesLayout.getContext());
+			image.setAdjustViewBounds(true);
+			int imageHeight = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 256, getResources().getDisplayMetrics()));
+
+			image.setMaxHeight(imageHeight);
+			image.setPadding(5,5,5,5);
+
+			new WebImageDownloader(image).execute(imgUrls.get(i));
+
+			imagesLayout.addView(image,imParams);
+		}
+	}
 }

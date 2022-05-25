@@ -1,6 +1,5 @@
 package pl.edu.pwr.lab.main_project.accommodations;
 
-import android.media.Image;
 import android.media.Rating;
 
 import java.util.List;
@@ -13,15 +12,15 @@ import pl.edu.pwr.lab.main_project.places.Place;
 //		>b. Description
 //		>c. Rate and rating functionality with review description
 //		>d. Place location (with map/direction)
-//		e. Images. (up to 3)
+//		>e. Images. (up to 3)
 public class Accommodation {
 
-	public Accommodation(String name, String description, List<Review> reviews, Place place, List<Image> images){
+	public Accommodation(String name, String description, List<Review> reviews, Place place, List<String> images){
 		this.name = name;
 		this.description = description;
 		this.reviews = reviews;
 		this.place = place;
-		this.images=images;
+		this.images = images;
 	}
 
 	public String getName() {
@@ -68,11 +67,11 @@ public class Accommodation {
 		this.place = place;
 	}
 
-	public List<Image> getImages() {
+	public List<String> getImageUrls() {
 		return images;
 	}
 
-	private void setImages(List<Image> images){
+	private void setImagesUrls(List<String> images){
 		this.images = images;
 	}
 
@@ -80,5 +79,5 @@ public class Accommodation {
 	private String description;
 	private List<Review> reviews;
 	private Place place;
-	private List<Image> images;
+	private List<String> images;
 }

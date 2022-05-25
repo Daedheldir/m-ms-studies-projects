@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array
+        name="places_img_webpages">
+        <item>https://wallpaperaccess.com/full/1128282.jpg</item>
+        <item>https://wallpaperaccess.com/full/1128295.jpg</item>
+        <item>https://wallpaperaccess.com/full/2534899.jpg</item>
+        <item>https://wallpaperaccess.com/full/2534911.jpg</item>
+        <item>https://wallpaperaccess.com/full/2534917.jpg</item>
+        <item>https://wallpaperaccess.com/full/2534939.jpg</item>
+        <item>https://wallpaperaccess.com/full/2534941.jpg</item>
+        <item>https://wallpaperaccess.com/full/2534953.jpg</item>
+        <item>https://wallpaperaccess.com/full/2534966.jpg</item>
+        <item>https://wallpaperaccess.com/full/2535020.jpg</item>
+        <item>https://wallpaperaccess.com/full/2535106.jpg</item>
+        <item>https://wallpaperaccess.com/full/5792878.jpg</item>
+    </string-array>
+    <string-array
+        name="accommodations_img_webpages">
+        <item>https://wallpaperaccess.com/full/658353.jpg</item>
+        <item>https://wallpaperaccess.com/full/658354.png</item>
+        <item>https://wallpaperaccess.com/full/658369.jpg</item>
+        <item>https://wallpaperaccess.com/full/658374.jpg</item>
+        <item>https://wallpaperaccess.com/full/658385.jpg</item>
+        <item>https://wallpaperaccess.com/full/5655394.jpg</item>
+        <item>https://wallpaperaccess.com/full/2690978.jpg</item>
+        <item>https://wallpaperaccess.com/full/2690578.jpg</item>
+        <item>https://wallpaperaccess.com/full/2690994.jpg</item>
+        <item>https://wallpaperaccess.com/full/5655441.jpg</item>
+    </string-array>
+    <string-array
+        name="events_img_webpages">
+        <item>https://wallpaperaccess.com/full/2489661.jpg</item>
+        <item>https://wallpaperaccess.com/full/2489663.jpg</item>
+        <item>https://wallpaperaccess.com/full/2489664.jpg</item>
+        <item>https://wallpaperaccess.com/full/2489665.jpg</item>
+        <item>https://wallpaperaccess.com/full/2489678.jpg</item>
+        <item>https://wallpaperaccess.com/full/2300142.jpg</item>
+        <item>https://wallpaperaccess.com/full/2489692.jpg</item>
+        <item>https://wallpaperaccess.com/full/2489838.jpg</item>
+        <item>https://wallpaperaccess.com/full/2489895.jpg</item>
+    </string-array>
+</resources>

@@ -84,12 +84,12 @@ public class Place {
 		this.locationCoords = locationCoords;
 	}
 	public void addImageFilepath(String imageFilepath){
-		List<String> imgFilepaths = getImageFilepaths();
+		List<String> imgFilepaths = getImageUrls();
 		imgFilepaths.add(imageFilepath);
 		setImageFilepaths(imgFilepaths);
 	}
 
-	public List<String> getImageFilepaths() {
+	public List<String> getImageUrls() {
 		return imageFilepaths;
 	}
 

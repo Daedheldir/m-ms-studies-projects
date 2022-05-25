@@ -15,7 +15,7 @@
 
 
         <TextView
-            android:id="@+id/accommodations_preview_name_textView"
+            android:id="@+id/events_preview_name_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/accommodations_preview_recyclerView"
+                android:id="@+id/events_preview_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -43,7 +43,7 @@
 
 
         <TextView
-            android:id="@+id/accommodations_preview_description_textView"
+            android:id="@+id/events_preview_description_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -57,7 +57,7 @@
             android:layout_weight="0">
 
             <LinearLayout
-                android:id="@+id/accommodations_preview_images_layout"
+                android:id="@+id/events_preview_images_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <WebView
-                android:id="@+id/accommodations_preview_webView"
+                android:id="@+id/events_preview_webView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="false"

@@ -91,19 +91,19 @@ public class MainActivity extends FragmentActivity {
 		ToursManager toursManager = ToursManager.getInstance();
 
 		for(int i = 0; i < 5; ++i){
-			Pair<Accommodation, Place> accommodationPlacePair = DataGenerator.createRandomAccomodationPlacePair();
+			Pair<Accommodation, Place> accommodationPlacePair = DataGenerator.createRandomAccommodationPlacePair(this);
 			placesManager.add(accommodationPlacePair.second);
 			accommodationsManager.add(accommodationPlacePair.first);
 		}
 
 		for(int i = 0; i < 5; ++i){
-			Pair<Event, Place> eventPlacePair = DataGenerator.createRandomEventPlacePair();
+			Pair<Event, Place> eventPlacePair = DataGenerator.createRandomEventPlacePair(this);
 			placesManager.add(eventPlacePair.second);
 			eventsManager.add(eventPlacePair.first);
 		}
 
 		for(int i = 0; i < 5; ++i){
-			Place place = DataGenerator.createRandomPlace();
+			Place place = DataGenerator.createRandomPlace(this);
 			placesManager.add(place);
 		}
 
